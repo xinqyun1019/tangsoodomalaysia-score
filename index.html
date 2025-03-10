@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taekwondo Scoreboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <div class="scoreboard">
+      <!-- Red Team -->
+      <div class="team red" id="red-container">
+        <h2>Red</h2>
+        <div class="penalty-container">
+          <button onclick="updatePenalty('red', 1)">+</button>
+          <span class="small-score" id="red-penalty">0</span>
+          <button onclick="updatePenalty('red', -1)">-</button>
+        </div>
+        <div class="big-score" id="red-score">0</div>
+        <button onclick="updateScore('red', 1)">+1</button>
+        <button onclick="updateScore('red', -1)">-1</button>
+      </div>
+
+      <!-- Timer Section -->
+      <div class="middle-section">
+        <button onclick="toggleFlexiButtons()" id="toggle-flexi-btn">⏱</button>
+        <div id="flexi-buttons" class="hidden">
+          <div class="timer-controls">
+            <button onclick="adjustTimer('minutes', 1)">+Min</button>
+            <button onclick="adjustTimer('seconds', 1)">+1s</button>
+          </div>
+          <div class="timer-controls">
+            <button onclick="adjustTimer('minutes', -1)">-Min</button>
+            <button onclick="adjustTimer('seconds', -1)">-1s</button>
+          </div>
+        </div>
+        <div id="timer-display">02:00</div>
+        <button onclick="toggleTimer()" id="play-pause-btn">Play</button>
+        <button onclick="resetTimer()">Reset</button>
+      </div>
+
+      <!-- Blue Team -->
+      <div class="team blue" id="blue-container">
+        <h2>Blue</h2>
+        <div class="penalty-container">
+          <button onclick="updatePenalty('blue', 1)">+</button>
+          <span class="small-score" id="blue-penalty">0</span>
+          <button onclick="updatePenalty('blue', -1)">-</button>
+        </div>
+        <div class="big-score" id="blue-score">0</div>
+        <button onclick="updateScore('blue', 1)">+1</button>
+        <button onclick="updateScore('blue', -1)">-1</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bar -->
+  <div class="footer-bar">
+    <button onclick="toggleTimerMode()" id="timer-mode">Match Timer</button>
+    <button onclick="openSettings()">⚙️</button>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Settings</h2>
+      <label>Match Timer (Minutes):</label>
+      <input type="number" id="match-minutes" value="2" min="1" />
+      <br />
+      <label>Interval Timer (Minutes):</label>
+      <input type="number" id="interval-minutes" value="2" min="1" />
+      <br />
+      <label>Rest Time (Seconds):</label>
+      <input type="number" id="rest-seconds" value="30" min="1" />
+      <br /><br />
+      <button onclick="resetMatchScore()">Reset Match Score</button>
+      <button onclick="resetPenaltyScore()">Reset Penalty Score</button>
+      <button onclick="resetAllScores()">Reset All</button>
+      <br /><br />
+      <button onclick="swapSides()">Swap Court</button>
+      <br /><br />
+      <button onclick="saveSettings()">Save</button>
+      <button onclick="closeSettings()">Close</button>
+    </div>
+  </div>
+</body>
+</html>
