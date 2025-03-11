@@ -112,8 +112,8 @@ body {
   gap: 10px;
   margin-bottom: 10px;
 }
-/* Minimalist timer buttons: remove background/shadow */
-.timer-buttons button {
+/* Minimalist timer buttons: remove shadow, no extra background */
+.minimal-btn {
   background: none;
   border: none;
   font-size: 1.2rem;
@@ -122,11 +122,9 @@ body {
   cursor: pointer;
   transition: color 0.2s ease;
 }
-.timer-buttons button:hover {
+.minimal-btn:hover {
   color: #fff;
 }
-
-/* Minimalist toggles in footer (moved to timer section are removed) */
 
 /* Footer Bar: Minimalist style */
 .footer-bar {
@@ -153,7 +151,7 @@ body {
   padding: 7px 7px;
 }
 
-/* iOS-style buttons for score/penalty controls (keep these as before) */
+/* iOS-style buttons for score/penalty controls */
 button {
   background: #fff;
   color: #333;
@@ -161,6 +159,7 @@ button {
   padding: 14px 24px;
   font-size: 1.2rem;
   border-radius: 20px;
+  /* Remove shadow for minimal look on some buttons if needed */
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   cursor: pointer;
   transition: background 0.2s ease;
@@ -234,7 +233,7 @@ button:hover {
   margin-top: 15px;
 }
 
-/* Modal close button: remove shadow */
+/* Modal close button: Remove shadow */
 .modal-close {
   position: absolute;
   top: 5px;
