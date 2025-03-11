@@ -8,70 +8,43 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="container">
-    <div class="scoreboard">
-      <!-- Timer Section -->
-      <div class="timer-container">
-        <button onclick="toggleFlexiButtons()" id="toggle-flexi-btn">⏱</button>
-        <div id="flexi-buttons" class="hidden">
-          <div class="timer-controls">
-            <button onclick="adjustTimer('minutes', 1)">➕Min</button>
-            <button onclick="adjustTimer('seconds', 1)">➕1s</button>
-          </div>
-          <div class="timer-controls">
-            <button onclick="adjustTimer('minutes', -1)">➖Min</button>
-            <button onclick="adjustTimer('seconds', -1)">➖1s</button>
-          </div>
-        </div>
-        <!-- Clicking the timer toggles play/pause -->
-        <div id="timer-display" onclick="toggleTimer()">02:00</div>
+  <div class="scoreboard">
+    <!-- Red Team -->
+    <div class="team red" id="red-container">
+      <h2>Red</h2>
+      <div class="penalty-section">
+        <span class="penalty-label">Penalty:</span>
+        <span class="penalty-score" id="red-penalty">0</span>
+      </div>
+      <div class="match-score" id="red-score">0</div>
+      <div class="score-controls">
+        <button onclick="updateScore('red', 1)">➕</button>
+        <button onclick="updateScore('red', -1)">➖</button>
+      </div>
+    </div>
+    
+    <!-- Timer Section -->
+    <div class="middle-section">
+      <!-- Clicking the timer toggles play/pause -->
+      <div id="timer-display" onclick="toggleTimer()">02:00</div>
+      <div class="timer-buttons">
         <button onclick="toggleTimer()" id="play-pause-btn">Play</button>
         <button onclick="resetTimer()">Reset</button>
       </div>
-      
-      <!-- Teams Section -->
-      <div class="teams-container">
-        <!-- Red Team -->
-        <div class="team red" id="red-container">
-          <h2>Red</h2>
-          <div class="match-score">
-            <div class="big-score" id="red-score">0</div>
-            <div class="score-controls">
-              <button onclick="updateScore('red', 1)">➕</button>
-              <button onclick="updateScore('red', -1)">➖</button>
-            </div>
-          </div>
-          <div class="penalty-section">
-            <span class="penalty-label">Penalty:</span>
-            <span class="small-score" id="red-penalty">0</span>
-            <div class="penalty-controls">
-              <button onclick="updatePenalty('red', 1)">➕</button>
-              <button onclick="updatePenalty('red', -1)">➖</button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Blue Team -->
-        <div class="team blue" id="blue-container">
-          <h2>Blue</h2>
-          <div class="match-score">
-            <div class="big-score" id="blue-score">0</div>
-            <div class="score-controls">
-              <button onclick="updateScore('blue', 1)">➕</button>
-              <button onclick="updateScore('blue', -1)">➖</button>
-            </div>
-          </div>
-          <div class="penalty-section">
-            <span class="penalty-label">Penalty:</span>
-            <span class="small-score" id="blue-penalty">0</span>
-            <div class="penalty-controls">
-              <button onclick="updatePenalty('blue', 1)">➕</button>
-              <button onclick="updatePenalty('blue', -1)">➖</button>
-            </div>
-          </div>
-        </div>
+    </div>
+    
+    <!-- Blue Team -->
+    <div class="team blue" id="blue-container">
+      <h2>Blue</h2>
+      <div class="penalty-section">
+        <span class="penalty-label">Penalty:</span>
+        <span class="penalty-score" id="blue-penalty">0</span>
       </div>
-      
+      <div class="match-score" id="blue-score">0</div>
+      <div class="score-controls">
+        <button onclick="updateScore('blue', 1)">➕</button>
+        <button onclick="updateScore('blue', -1)">➖</button>
+      </div>
     </div>
   </div>
 
