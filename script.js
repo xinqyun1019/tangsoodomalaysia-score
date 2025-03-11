@@ -176,3 +176,23 @@ document.getElementById("modal-close").addEventListener("click", function() {
 // Initialize timer on load
 updateCurrentTime();
 updateTimerDisplay();
+
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('install-button').style.display = 'block';
+});
+
+document.getElementById('install-button').addEventListener('click', () => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choiceResult => {
+        if (choiceResult.outcome === 'accepted') {
+            console.log('User installed PWA');
+        } else {
+            console.log('User dismissed PWA install');
+        }
+        deferredPrompt = null;
+    });
+});
