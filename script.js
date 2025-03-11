@@ -184,21 +184,26 @@ let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    document.getElementById('install-button').style.display = 'block';
-});
+    
+    // Show the install button when the event is fired
+    const installButton = document.getElementById('install-button');
+    if (installButton) {
+        installButton.style.display = 'block';
 
-document.getElementById('install-button').addEventListener('click', () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(choiceResult => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('User installed PWA');
-            } else {
-                console.log('User dismissed PWA install');
+        installButton.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt(); // Show install prompt
+
+                deferredPrompt.userChoice.then(choiceResult => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the PWA install');
+                    } else {
+                        console.log('User dismissed the PWA install');
+                    }
+                    deferredPrompt = null; // Reset after use
+                });
             }
-            deferredPrompt = null; // Reset after prompt
         });
-    } else {
-        console.log("Install prompt not available.");
     }
 });
+
