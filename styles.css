@@ -175,6 +175,10 @@ body {
   background: #ddd;
 }
 
+.modal-btn {
+font-size 1rem
+}
+
 /* For other buttons, minimal styling already applied via minimal-btn and footer buttons */
 
 /* Modal Overlay */
@@ -288,5 +292,9 @@ body {
   }
   .team h2 {
     font-size: 1.8rem; /* Reduced 10% from 2rem */
+  }
+
+  .control-btn {
+    font-size: 0.9rem;
   }
 }
