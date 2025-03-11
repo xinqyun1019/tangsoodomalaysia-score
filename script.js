@@ -102,20 +102,34 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap the team nodes by swapping their positions in the parent container
+  // Swap the team containers by swapping their positions
   let red = document.getElementById("red-container");
   let blue = document.getElementById("blue-container");
   let parent = red.parentElement;
   // Swap positions in the DOM
-  parent.insertBefore(blue, red);
-  // Now swap the color classes
-  let redClass = red.className;
-  let blueClass = blue.className;
-  // Replace "red" with a temporary marker
-  red.className = red.className.replace("red", "tempColor");
-  blue.className = blue.className.replace("blue", "red");
-  red.className = red.className.replace("tempColor", "blue");
-  // Now, ensure the team labels remain the same (if necessary, you can update innerHTML)
+  if (red.compareDocumentPosition(blue) & Node.DOCUMENT_POSITION_FOLLOWING) {
+    parent.insertBefore(blue, red);
+  } else {
+    parent.insertBefore(red, blue);
+  }
+  // Now swap their color classes
+  if (red.classList.contains("red")) {
+    red.classList.remove("red");
+    red.classList.add("blue");
+    blue.classList.remove("blue");
+    blue.classList.add("red");
+  } else {
+    red.classList.remove("blue");
+    red.classList.add("red");
+    blue.classList.remove("red");
+    blue.classList.add("blue");
+  }
+  // Also swap the team heading text for consistency
+  let redHeading = red.querySelector("h2");
+  let blueHeading = blue.querySelector("h2");
+  let temp = redHeading.textContent;
+  redHeading.textContent = blueHeading.textContent;
+  blueHeading.textContent = temp;
 }
 
 function openSettings() {
@@ -124,7 +138,7 @@ function openSettings() {
 }
 
 function closeSettings() {
-  // On closing, auto-save settings
+  // Auto-save settings when closing (via click outside or X button)
   saveSettings();
 }
 
@@ -165,14 +179,14 @@ function resetAllScores() {
   resetPenaltyScore();
 }
 
-// Close modal when clicking outside modal content, auto-save settings
+// Close modal when clicking outside modal content
 document.getElementById("settings-overlay").addEventListener("click", function(e) {
   if (e.target === this) {
     closeSettings();
   }
 });
 
-// Close modal when clicking the X button, auto-save settings
+// Close modal when clicking the X button
 document.getElementById("modal-close").addEventListener("click", function() {
   closeSettings();
 });
