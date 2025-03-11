@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 /* Body styling */
@@ -13,14 +13,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   min-height: 100vh;
+  width: 100%;
 }
 
-/* Scoreboard layout (Desktop) */
+/* Scoreboard layout (full height, responsive width) */
 .scoreboard {
-  width: 90%;
-  max-width: 1000px;
+  width: 100%;
+  max-width: 1200px;
+  flex: 1;
   background: #333;
   padding: 20px;
   border-radius: 10px;
@@ -33,7 +34,7 @@ body {
 .team {
   width: 30%;
   background: #444;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
 }
 .team h2 {
@@ -43,8 +44,8 @@ body {
 
 /* Penalty section */
 .penalty-section {
-  font-size: 0.9rem;
   margin-bottom: 10px;
+  font-size: 0.9rem;
 }
 .penalty-label {
   font-weight: bold;
@@ -53,15 +54,22 @@ body {
   font-size: 1.2rem;
   margin-left: 5px;
 }
+.penalty-controls {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
 
 /* Match score and score controls */
 .match-score {
   font-size: 6rem;
   font-weight: bold;
   background: black;
-  padding: 20px;
+  padding: 15px;
   border-radius: 10px;
   margin-bottom: 10px;
+  text-align: center;
 }
 .score-controls {
   display: flex;
@@ -69,11 +77,27 @@ body {
   gap: 10px;
 }
 
-/* Middle Section (Timer) */
+/* iOS-style button */
+button {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+button:hover {
+  background: #777;
+}
+
+/* Timer Section */
 .middle-section {
   width: 30%;
   background: #444;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -104,10 +128,10 @@ body {
 }
 .footer-bar button {
   font-size: 1.2rem;
-  padding: 10px 20px;
+  padding: 12px 20px;
 }
 
-/* Modal Overlay */
+/* Modal Overlay and Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -120,8 +144,6 @@ body {
   align-items: center;
   z-index: 2000;
 }
-
-/* Modal Styling */
 .modal {
   background: #444;
   padding: 20px;
@@ -136,6 +158,7 @@ body {
 }
 .modal label {
   margin: 10px 0 5px;
+  font-size: 1rem;
 }
 .modal input {
   width: 60px;
@@ -143,8 +166,13 @@ body {
   margin-bottom: 10px;
   font-size: 1rem;
 }
-
-/* Modal close button (X at top right) */
+.modal .settings-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
 .modal-close {
   position: absolute;
   top: 5px;
@@ -162,15 +190,14 @@ body {
 }
 
 /* Responsive Styles */
-/* Mobile: Timer on top, teams side by side */
 @media (max-width: 600px) {
   .scoreboard {
     flex-direction: column;
     align-items: center;
   }
   .middle-section {
-    order: -1;
     width: 100%;
+    order: -1;
     margin-bottom: 20px;
   }
   .team {
@@ -178,8 +205,8 @@ body {
     margin: 5px;
   }
   .scoreboard {
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
   }
   #timer-display {
     font-size: 3rem;
