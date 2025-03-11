@@ -37,6 +37,11 @@
         <button id="play-pause-btn" onclick="toggleTimer()">Play</button>
         <button onclick="resetTimer()">Reset</button>
       </div>
+      <!-- New toggles moved from footer -->
+      <div class="timer-toggles">
+        <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
+        <button onclick="openSettings()">⚙️</button>
+      </div>
     </div>
 
     <!-- Blue Team -->
@@ -59,16 +64,9 @@
     </div>
   </div>
 
-  <!-- Footer Bar (Minimalist) -->
-  <div class="footer-bar">
-    <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
-    <button onclick="openSettings()">⚙️</button>
-  </div>
-
   <!-- Settings Modal with Overlay -->
   <div id="settings-overlay" class="modal-overlay hidden">
     <div id="settings-modal" class="modal">
-      <!-- Now functions as Save & Close -->
       <button class="modal-close" id="modal-close">✖</button>
       <div class="modal-content">
         <h2>Settings</h2>
