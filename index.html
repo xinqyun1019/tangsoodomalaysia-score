@@ -21,7 +21,7 @@
           <button onclick="updatePenalty('red', 1)">➕</button>
         </div>
       </div>
-      <!-- Clicking the score also adds 1 point -->
+      <!-- Clicking the score adds 1 point -->
       <div class="match-score" id="red-score" onclick="updateScore('red', 1)">0</div>
       <div class="score-controls">
         <button onclick="updateScore('red', -1)">➖</button>
@@ -31,7 +31,7 @@
 
     <!-- Timer Section -->
     <div class="middle-section" id="timer-section">
-      <!-- Clicking the timer toggles play/pause -->
+      <!-- Clicking the timer display toggles play/pause -->
       <div id="timer-display" onclick="toggleTimer()">02:00</div>
       <div class="timer-buttons">
         <button id="play-pause-btn" onclick="toggleTimer()">Play</button>
@@ -50,7 +50,7 @@
           <button onclick="updatePenalty('blue', 1)">➕</button>
         </div>
       </div>
-      <!-- Clicking the score also adds 1 point -->
+      <!-- Clicking the score adds 1 point -->
       <div class="match-score" id="blue-score" onclick="updateScore('blue', 1)">0</div>
       <div class="score-controls">
         <button onclick="updateScore('blue', -1)">➖</button>
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <!-- Footer Bar (minimalist style) -->
+  <!-- Footer Bar (Minimalist style) -->
   <div class="footer-bar">
     <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
     <button onclick="openSettings()">⚙️</button>
@@ -72,26 +72,32 @@
       <div class="modal-content">
         <h2>Settings</h2>
         <div class="settings-row">
-          <label for="match-minutes">Match:</label>
-          <input type="number" id="match-minutes" value="2" min="1">
-          <span>min</span>
+          <label for="match-minutes">Match Timer:</label>
+          <div class="input-group">
+            <input type="number" id="match-minutes" value="2" min="1">
+            <span>min</span>
+          </div>
         </div>
         <div class="settings-row">
-          <label for="interval-minutes">Interval:</label>
-          <input type="number" id="interval-minutes" value="1" min="1">
-          <span>min</span>
+          <label for="interval-minutes">Interval Timer:</label>
+          <div class="input-group">
+            <input type="number" id="interval-minutes" value="1" min="1">
+            <span>min</span>
+          </div>
         </div>
         <div class="settings-row">
-          <label for="rest-seconds">Rest:</label>
-          <input type="number" id="rest-seconds" value="60" min="1">
-          <span>sec</span>
+          <label for="rest-seconds">Rest Time:</label>
+          <div class="input-group">
+            <input type="number" id="rest-seconds" value="60" min="1">
+            <span>sec</span>
+          </div>
         </div>
-        <div class="reset-buttons">
+        <div class="settings-row two-col">
           <button onclick="resetMatchScore()">Reset Match</button>
           <button onclick="resetPenaltyScore()">Reset Penalty</button>
-          <button onclick="resetAllScores()">Reset All</button>
         </div>
-        <div class="settings-row">
+        <div class="settings-row two-col">
+          <button onclick="resetAllScores()">Reset All</button>
           <button onclick="swapSides()">Swap Court</button>
         </div>
         <div class="settings-row">
