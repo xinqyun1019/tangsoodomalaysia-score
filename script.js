@@ -1,6 +1,6 @@
 // Timer settings objects
 let matchTime = { minutes: 2, seconds: 0 };
-let roundTime = { minutes: 1, seconds: 0 };  // default interval timer = 1 min
+let roundTime = { minutes: 1, seconds: 0 }; // default interval timer = 1 minute
 let restTime = { seconds: 60 };
 
 let isIntervalTimer = false;
@@ -18,45 +18,10 @@ function updateCurrentTime() {
 }
 
 function updateTimerDisplay() {
-  let minutes = Math.floor(currentTime / 60);
-  let seconds = currentTime % 60;
+  let m = Math.floor(currentTime / 60);
+  let s = currentTime % 60;
   document.getElementById("timer-display").textContent =
-    `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-}
-
-function toggleTimerMode() {
-  isIntervalTimer = !isIntervalTimer;
-  document.getElementById("timer-mode").textContent = isIntervalTimer ? "Interval Timer" : "Match Timer";
-  resetTimer();
-}
-
-function toggleFlexiButtons() {
-  if (isRunning) return; // Hide adjustments when timer is running
-  let flexiButtons = document.getElementById("flexi-buttons");
-  let toggleBtn = document.getElementById("toggle-flexi-btn");
-  if (flexiButtons.classList.contains("hidden")) {
-    flexiButtons.classList.remove("hidden");
-    toggleBtn.textContent = "Hide Adjustments";
-  } else {
-    flexiButtons.classList.add("hidden");
-    toggleBtn.textContent = "⏱";
-  }
-}
-
-function adjustTimer(type, value) {
-  if (isRunning) return;
-  let time = isIntervalTimer ? roundTime : matchTime;
-  if (type === "seconds") {
-    time.seconds = Math.max(0, time.seconds + value);
-    if (time.seconds >= 60) {
-      time.minutes += Math.floor(time.seconds / 60);
-      time.seconds %= 60;
-    }
-  } else if (type === "minutes") {
-    time.minutes = Math.max(0, time.minutes + value);
-  }
-  updateCurrentTime();
-  updateTimerDisplay();
+    String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
 }
 
 function toggleTimer() {
@@ -71,10 +36,6 @@ function startTimer() {
   if (isRunning) return;
   isRunning = true;
   document.getElementById("play-pause-btn").textContent = "Pause";
-  // Hide flexi adjustments when timer starts
-  document.getElementById("flexi-buttons").classList.add("hidden");
-  document.getElementById("toggle-flexi-btn").textContent = "⏱";
-  
   timerInterval = setInterval(() => {
     if (currentTime <= 0) {
       clearInterval(timerInterval);
@@ -101,8 +62,36 @@ function resetTimer() {
   updateTimerDisplay();
 }
 
-// Penalty: adds/subtracts from opponent's score; cannot go below 0.
+function toggleTimerMode() {
+  isIntervalTimer = !isIntervalTimer;
+  document.getElementById("timer-mode").textContent = isIntervalTimer ? "Interval Timer" : "Match Timer";
+  resetTimer();
+}
+
+function adjustTimer(type, value) {
+  if (isRunning) return;
+  let time = isIntervalTimer ? roundTime : matchTime;
+  if (type === "seconds") {
+    time.seconds = Math.max(0, time.seconds + value);
+    if (time.seconds >= 60) {
+      time.minutes += Math.floor(time.seconds / 60);
+      time.seconds %= 60;
+    }
+  } else if (type === "minutes") {
+    time.minutes = Math.max(0, time.minutes + value);
+  }
+  updateCurrentTime();
+  updateTimerDisplay();
+}
+
+function updateScore(team, value) {
+  let scoreEl = document.getElementById(`${team}-score`);
+  let currentScore = parseInt(scoreEl.textContent);
+  scoreEl.textContent = Math.max(0, currentScore + value);
+}
+
 function updatePenalty(team, value) {
+  // Penalty for a team adds/subtracts from opponent's score.
   let penaltyEl = document.getElementById(`${team}-penalty`);
   let opponent = team === "red" ? "blue" : "red";
   let opponentScoreEl = document.getElementById(`${opponent}-score`);
@@ -114,20 +103,13 @@ function updatePenalty(team, value) {
   opponentScoreEl.textContent = Math.max(0, currentOpponentScore + diff);
 }
 
-function updateScore(team, value) {
-  let scoreEl = document.getElementById(`${team}-score`);
-  let currentScore = parseInt(scoreEl.textContent);
-  scoreEl.textContent = Math.max(0, currentScore + value);
-}
-
-// Swap Sides: swap inner HTML and swap container classes to swap colors
 function swapSides() {
+  // Swap innerHTML and classes so that colors swap too.
   let redContainer = document.getElementById("red-container");
   let blueContainer = document.getElementById("blue-container");
   let tempHTML = redContainer.innerHTML;
   redContainer.innerHTML = blueContainer.innerHTML;
   blueContainer.innerHTML = tempHTML;
-  // Swap classes for color (red <-> blue)
   if (redContainer.classList.contains("red")) {
     redContainer.classList.remove("red");
     redContainer.classList.add("blue");
