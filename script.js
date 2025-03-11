@@ -177,6 +177,8 @@ document.getElementById("modal-close").addEventListener("click", function() {
 updateCurrentTime();
 updateTimerDisplay();
 
+//Install Prompt
+
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
@@ -186,13 +188,17 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 
 document.getElementById('install-button').addEventListener('click', () => {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(choiceResult => {
-        if (choiceResult.outcome === 'accepted') {
-            console.log('User installed PWA');
-        } else {
-            console.log('User dismissed PWA install');
-        }
-        deferredPrompt = null;
-    });
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(choiceResult => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User installed PWA');
+            } else {
+                console.log('User dismissed PWA install');
+            }
+            deferredPrompt = null; // Reset after prompt
+        });
+    } else {
+        console.log("Install prompt not available.");
+    }
 });
