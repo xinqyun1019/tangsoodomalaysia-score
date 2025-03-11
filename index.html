@@ -31,12 +31,26 @@
 
     <!-- Timer Section -->
     <div class="middle-section" id="timer-section">
-      <!-- Clicking the timer toggles play/pause -->
+      <!-- Timer display toggles play/pause on click -->
       <div id="timer-display" onclick="toggleTimer()">02:00</div>
+      <!-- Minimalist timer buttons (no shadow) -->
       <div class="timer-buttons">
         <button id="play-pause-btn" onclick="toggleTimer()" class="minimal-btn">Play</button>
         <button onclick="resetTimer()" class="minimal-btn">Reset</button>
       </div>
+      <!-- Timer Modification Controls -->
+      <button id="toggle-flexi-btn" class="minimal-btn" onclick="toggleFlexiButtons()">⏱</button>
+      <div id="flexi-buttons" class="flexi-buttons hidden">
+        <div class="timer-controls">
+          <button onclick="adjustTimer('minutes', 1)" class="minimal-btn">➕Min</button>
+          <button onclick="adjustTimer('seconds', 1)" class="minimal-btn">➕1s</button>
+        </div>
+        <div class="timer-controls">
+          <button onclick="adjustTimer('minutes', -1)" class="minimal-btn">➖Min</button>
+          <button onclick="adjustTimer('seconds', -1)" class="minimal-btn">➖1s</button>
+        </div>
+      </div>
+      <!-- Minimalist toggles for Match Timer and Settings are in the footer (see below) -->
     </div>
 
     <!-- Blue Team -->
@@ -59,7 +73,7 @@
     </div>
   </div>
 
-  <!-- Footer Bar (Minimalist: text-only, no extra styling) -->
+  <!-- Footer Bar: Minimalist toggles placed at the bottom of the timer section -->
   <div class="footer-bar">
     <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
     <button onclick="openSettings()">⚙️</button>
