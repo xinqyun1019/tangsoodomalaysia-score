@@ -22,7 +22,6 @@ body {
 /* Scoreboard layout: full height up to footer */
 .scoreboard {
   width: 100%;
-  max-width: 1200px;
   min-height: calc(100vh - 70px);
   background: #333;
   padding: 20px;
