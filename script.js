@@ -1,7 +1,7 @@
 // Timer settings objects
 let matchTime = { minutes: 2, seconds: 0 };
 let roundTime = { minutes: 1, seconds: 0 }; // default interval timer = 1 minute
-let restTime = { seconds: 60 };
+let restTime = { seconds: 30 };             // default rest time = 30 sec
 
 let isIntervalTimer = false;
 let isRunning = false;
@@ -102,17 +102,17 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap the team containers by swapping their positions
+  // Swap the team nodes by swapping their positions in the DOM.
   let red = document.getElementById("red-container");
   let blue = document.getElementById("blue-container");
   let parent = red.parentElement;
-  // Swap positions in the DOM
+  // Insert blue before red if red comes first.
   if (red.compareDocumentPosition(blue) & Node.DOCUMENT_POSITION_FOLLOWING) {
     parent.insertBefore(blue, red);
   } else {
     parent.insertBefore(red, blue);
   }
-  // Now swap their color classes
+  // Swap the color classes
   if (red.classList.contains("red")) {
     red.classList.remove("red");
     red.classList.add("blue");
@@ -124,12 +124,6 @@ function swapSides() {
     blue.classList.remove("red");
     blue.classList.add("blue");
   }
-  // Also swap the team heading text for consistency
-  let redHeading = red.querySelector("h2");
-  let blueHeading = blue.querySelector("h2");
-  let temp = redHeading.textContent;
-  redHeading.textContent = blueHeading.textContent;
-  blueHeading.textContent = temp;
 }
 
 function openSettings() {
@@ -138,7 +132,7 @@ function openSettings() {
 }
 
 function closeSettings() {
-  // Auto-save settings when closing (via click outside or X button)
+  // Auto-save on close
   saveSettings();
 }
 
