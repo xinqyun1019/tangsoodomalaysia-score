@@ -71,17 +71,12 @@ function toggleTimerMode() {
 
 function adjustTimer(type, value) {
   if (isRunning) return;
-  let time = isIntervalTimer ? roundTime : matchTime;
+  // Modify the currentTime directly so that adjustments add to current value.
   if (type === "seconds") {
-    time.seconds = Math.max(0, time.seconds + value);
-    if (time.seconds >= 60) {
-      time.minutes += Math.floor(time.seconds / 60);
-      time.seconds %= 60;
-    }
+    currentTime = Math.max(0, currentTime + value);
   } else if (type === "minutes") {
-    time.minutes = Math.max(0, time.minutes + value);
+    currentTime = Math.max(0, currentTime + value * 60);
   }
-  updateCurrentTime();
   updateTimerDisplay();
 }
 
@@ -118,19 +113,12 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap the IDs of the two team containers.
+  // Swap the IDs of the team containers so that the CSS grid areas and backgrounds swap.
   let red = document.getElementById("red-container");
   let blue = document.getElementById("blue-container");
-  // Swap ID attributes
   let tempID = red.id;
   red.id = blue.id;
   blue.id = tempID;
-  // Also swap the team header texts
-  let redHeader = red.querySelector("h2");
-  let blueHeader = blue.querySelector("h2");
-  let tempText = redHeader.textContent;
-  redHeader.textContent = blueHeader.textContent;
-  blueHeader.textContent = tempText;
 }
 
 function openSettings() {
@@ -139,15 +127,14 @@ function openSettings() {
 }
 
 function closeSettings() {
-  // Auto-save settings on close
   saveSettings();
 }
 
 function saveSettings() {
   matchTime.minutes = parseInt(document.getElementById("match-minutes").value);
-  matchTime.seconds = 0;
+  matchTime.seconds = parseInt(document.getElementById("match-seconds").value);
   roundTime.minutes = parseInt(document.getElementById("interval-minutes").value);
-  roundTime.seconds = 0;
+  roundTime.seconds = parseInt(document.getElementById("interval-seconds").value);
   restTime.seconds = parseInt(document.getElementById("rest-seconds").value);
   updateCurrentTime();
   updateTimerDisplay();
