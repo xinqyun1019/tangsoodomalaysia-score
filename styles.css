@@ -265,12 +265,14 @@ width: 100%;
 /* Responsive Styles */
 @media (max-width: 600px) {
   .scoreboard {
-    width: 85%;  /* Adjust to 85% view for Mobile Safari */
+    width: 95%;  /* Adjust to 85% view for Mobile Safari */
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "timer timer"
       "red blue";
     gap: 10px;
+    padding: 5px;
+    min-height: auto;
   }
   .scoreboard.swapped {
     grid-template-areas:
