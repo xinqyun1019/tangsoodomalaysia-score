@@ -19,7 +19,7 @@ body {
   padding: 10px;
 }
 
-/* Scoreboard layout: full height up to footer */
+/* Scoreboard layout: full height up to footer space */
 .scoreboard {
   width: 100%;
   max-width: 1200px;
@@ -110,34 +110,30 @@ body {
 .timer-buttons {
   display: flex;
   gap: 10px;
+  margin-bottom: 10px;
+}
+.timer-toggles {
+  display: flex;
+  gap: 20px;
 }
 
-/* Footer Bar: minimalist style */
-.footer-bar {
-  width: 100%;
-  background-color: #222;
-  border-top: 1px solid #555;
-  padding: 10px 0;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  justify-content: space-around;
-}
-.footer-bar button {
+/* Minimalist toggles in timer section */
+.timer-toggles button {
   background: none;
   border: none;
   font-size: 1.2rem;
   color: #fff;
-  padding: 5px;
   cursor: pointer;
   transition: color 0.2s ease, padding 0.2s ease;
 }
-.footer-bar button:hover {
+.timer-toggles button:hover {
   color: #000;
   padding: 7px 7px;
 }
 
-/* iOS-style buttons for non-footer buttons */
+/* Footer removed; toggles moved into timer section */
+
+/* iOS-style buttons for score/penalty (non-toggle) */
 button {
   background: #fff;
   color: #333;
