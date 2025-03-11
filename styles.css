@@ -43,6 +43,7 @@ body {
   font-size: 2rem;
   margin-bottom: 10px;
 }
+/* Set team backgrounds via IDs */
 #red-container {
   grid-area: red;
   background: #b71c1c; /* Dark Red */
@@ -52,7 +53,7 @@ body {
   background: #0d47a1; /* Dark Blue */
 }
 
-/* When scoreboard has 'swapped' class, swap grid areas */
+/* When scoreboard has "swapped" class, swap grid areas */
 .scoreboard.swapped {
   grid-template-areas: "blue timer red";
 }
@@ -117,7 +118,7 @@ body {
   gap: 10px;
   margin-bottom: 10px;
 }
-/* Minimalist timer buttons */
+/* Minimalist timer buttons (no background, no box-shadow) */
 .minimal-btn {
   background: none;
   border: none;
@@ -172,7 +173,7 @@ body {
   background: #ddd;
 }
 
-/* For other buttons, use minimal styling (no box-shadow) applied via minimal-btn and footer buttons */
+/* For other buttons, minimal style already defined via minimal-btn and footer buttons */
 
 /* Modal Overlay */
 .modal-overlay {
@@ -257,8 +258,13 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "timer timer"
+      /* When swapped, change order of teams */
       "red blue";
-    gap: 10px;
+  }
+  .scoreboard.swapped {
+    grid-template-areas:
+      "timer timer"
+      "blue red";
   }
   .middle-section {
     grid-area: timer;
