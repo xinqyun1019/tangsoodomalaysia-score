@@ -8,13 +8,11 @@ let isRunning = false;
 let timerInterval;
 let currentTime = 0;
 
-// Set currentTime based on the current mode
+// Set currentTime based on current mode
 function updateCurrentTime() {
-  if (isIntervalTimer) {
-    currentTime = roundTime.minutes * 60 + roundTime.seconds;
-  } else {
-    currentTime = matchTime.minutes * 60 + matchTime.seconds;
-  }
+  currentTime = isIntervalTimer
+    ? roundTime.minutes * 60 + roundTime.seconds
+    : matchTime.minutes * 60 + matchTime.seconds;
 }
 
 function updateTimerDisplay() {
@@ -104,23 +102,20 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap team containers and their color classes.
-  let redContainer = document.getElementById("red-container");
-  let blueContainer = document.getElementById("blue-container");
-  let parent = redContainer.parentElement;
-  // Swap nodes:
-  parent.insertBefore(blueContainer, redContainer);
-  // Now swap color classes.
-  let redIsRed = redContainer.classList.contains("red");
-  redContainer.classList.remove("red", "blue");
-  blueContainer.classList.remove("red", "blue");
-  if (redIsRed) {
-    redContainer.classList.add("blue");
-    blueContainer.classList.add("red");
-  } else {
-    redContainer.classList.add("red");
-    blueContainer.classList.add("blue");
-  }
+  // Swap the team nodes by swapping their positions in the parent container
+  let red = document.getElementById("red-container");
+  let blue = document.getElementById("blue-container");
+  let parent = red.parentElement;
+  // Swap positions in the DOM
+  parent.insertBefore(blue, red);
+  // Now swap the color classes
+  let redClass = red.className;
+  let blueClass = blue.className;
+  // Replace "red" with a temporary marker
+  red.className = red.className.replace("red", "tempColor");
+  blue.className = blue.className.replace("blue", "red");
+  red.className = red.className.replace("tempColor", "blue");
+  // Now, ensure the team labels remain the same (if necessary, you can update innerHTML)
 }
 
 function openSettings() {
@@ -129,8 +124,8 @@ function openSettings() {
 }
 
 function closeSettings() {
-  let overlay = document.getElementById("settings-overlay");
-  overlay.classList.add("hidden");
+  // On closing, auto-save settings
+  saveSettings();
 }
 
 function saveSettings() {
@@ -141,7 +136,8 @@ function saveSettings() {
   restTime.seconds = parseInt(document.getElementById("rest-seconds").value);
   updateCurrentTime();
   updateTimerDisplay();
-  closeSettings();
+  let overlay = document.getElementById("settings-overlay");
+  overlay.classList.add("hidden");
 }
 
 function resetMatchScore() {
@@ -169,14 +165,14 @@ function resetAllScores() {
   resetPenaltyScore();
 }
 
-// Close modal when clicking outside modal content
+// Close modal when clicking outside modal content, auto-save settings
 document.getElementById("settings-overlay").addEventListener("click", function(e) {
   if (e.target === this) {
     closeSettings();
   }
 });
 
-// Close modal when clicking the X button
+// Close modal when clicking the X button, auto-save settings
 document.getElementById("modal-close").addEventListener("click", function() {
   closeSettings();
 });
