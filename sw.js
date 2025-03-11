@@ -2,9 +2,9 @@ const CACHE_NAME = "offline-cache-v1";
 const urlsToCache = [
     "/",
     "/index.html",
-    "/style.css",  // Adjust if your CSS file has a different name
-    "/script.js",  // Adjust if your JS file has a different name
-    "/images/logo.png",  // Example image file
+    "/style.css",  // Change this if your CSS file has a different name
+    "/script.js",  // Change this if your JS file has a different name
+    "/images/logo.png",  // Example: Add any image file you want to cache
 ];
 
 // Install event: Cache files when the Service Worker is installed
