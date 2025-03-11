@@ -18,10 +18,10 @@ function updateCurrentTime() {
 }
 
 function updateTimerDisplay() {
-  let m = Math.floor(currentTime / 60);
-  let s = currentTime % 60;
+  let minutes = Math.floor(currentTime / 60);
+  let seconds = currentTime % 60;
   document.getElementById("timer-display").textContent =
-    String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
 }
 
 function toggleTimer() {
@@ -36,6 +36,8 @@ function startTimer() {
   if (isRunning) return;
   isRunning = true;
   document.getElementById("play-pause-btn").textContent = "Pause";
+  // Hide any timer adjustment buttons when running (if any)
+  document.getElementById("toggle-flexi-btn")?.classList.add("hidden");
   timerInterval = setInterval(() => {
     if (currentTime <= 0) {
       clearInterval(timerInterval);
@@ -85,16 +87,16 @@ function adjustTimer(type, value) {
 }
 
 function updateScore(team, value) {
-  let scoreEl = document.getElementById(`${team}-score`);
+  let scoreEl = document.getElementById(team + "-score");
   let currentScore = parseInt(scoreEl.textContent);
   scoreEl.textContent = Math.max(0, currentScore + value);
 }
 
 function updatePenalty(team, value) {
   // Penalty for a team adds/subtracts from opponent's score.
-  let penaltyEl = document.getElementById(`${team}-penalty`);
+  let penaltyEl = document.getElementById(team + "-penalty");
   let opponent = team === "red" ? "blue" : "red";
-  let opponentScoreEl = document.getElementById(`${opponent}-score`);
+  let opponentScoreEl = document.getElementById(opponent + "-score");
   let currentPenalty = parseInt(penaltyEl.textContent);
   let currentOpponentScore = parseInt(opponentScoreEl.textContent);
   let newPenalty = Math.max(0, currentPenalty + value);
@@ -104,7 +106,7 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap innerHTML and classes so that colors swap too.
+  // Swap innerHTML and swap container classes so that colors swap too.
   let redContainer = document.getElementById("red-container");
   let blueContainer = document.getElementById("blue-container");
   let tempHTML = redContainer.innerHTML;
@@ -123,16 +125,15 @@ function swapSides() {
   }
 }
 
+// Modal functionality
 function openSettings() {
-  let modal = document.getElementById("settings-modal");
-  modal.classList.remove("hidden");
-  modal.style.display = "block";
+  let overlay = document.getElementById("settings-overlay");
+  overlay.classList.remove("hidden");
 }
 
 function closeSettings() {
-  let modal = document.getElementById("settings-modal");
-  modal.classList.add("hidden");
-  modal.style.display = "none";
+  let overlay = document.getElementById("settings-overlay");
+  overlay.classList.add("hidden");
 }
 
 function saveSettings() {
@@ -170,6 +171,18 @@ function resetAllScores() {
   resetMatchScore();
   resetPenaltyScore();
 }
+
+// Close modal if clicking outside the modal content
+document.getElementById("settings-overlay").addEventListener("click", function(e) {
+  if (e.target === this) {
+    closeSettings();
+  }
+});
+
+// Close modal if clicking the X button
+document.getElementById("modal-close").addEventListener("click", function() {
+  closeSettings();
+});
 
 // Initialize timer on load
 updateCurrentTime();
