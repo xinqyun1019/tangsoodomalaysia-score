@@ -175,7 +175,7 @@ body {
   background: #ddd;
 }
 
-/* For other buttons (minimal style) already defined via minimal-btn and footer buttons */
+/* For other buttons, minimal styling already applied via minimal-btn and footer buttons */
 
 /* Modal Overlay */
 .modal-overlay {
@@ -257,6 +257,7 @@ body {
 /* Responsive Styles */
 @media (max-width: 600px) {
   .scoreboard {
+    width: 85%;  /* Adjust to 85% view for Mobile Safari */
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "timer timer"
@@ -274,18 +275,18 @@ body {
     padding: 10px 5px; /* Reduced padding for tighter layout */
   }
   #timer-display {
-    font-size: 4.5rem; /* reduced 10% from 5rem */
-    padding: 13.5px 27px; /* reduced 10% from 15px 30px */
-    margin-bottom: 8px; /* reduced margin */
+    font-size: 4.5rem; /* Reduced 10% from 5rem */
+    padding: 13.5px 27px; /* Reduced 10% from 15px 30px */
+    margin-bottom: 8px; /* Reduced margin */
   }
   .timer-buttons {
     margin-bottom: 8px;
   }
   .match-score {
-    font-size: 5.4rem; /* reduced 10% from 6rem */
-    padding: 18px;     /* reduced 10% from 20px */
+    font-size: 5.4rem; /* Reduced 10% from 6rem */
+    padding: 18px;     /* Reduced 10% from 20px */
   }
   .team h2 {
-    font-size: 1.8rem; /* reduced 10% from 2rem */
+    font-size: 1.8rem; /* Reduced 10% from 2rem */
   }
 }
