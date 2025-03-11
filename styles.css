@@ -166,7 +166,7 @@ body {
   border: none;
   padding: 18px 26px;
   font-size: 1.4rem;
-  border-radius: 20px;
+  border-radius: 100px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   cursor: pointer;
   transition: background 0.2s ease;
@@ -196,7 +196,7 @@ font-size: 1rem;
 }
 .modal {
   background: #444;
-  padding: 20px;
+  padding: 40px;
   border-radius: 10px;
   width: 90%;
   max-width: 400px;
@@ -243,8 +243,8 @@ font-size: 1rem;
 /* Modal close button: minimal style, no box-shadow */
 .modal-close {
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 15px;
+  right: 20px;
   background: transparent;
   border: none;
   font-size: 1.5rem;
