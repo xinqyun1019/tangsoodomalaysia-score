@@ -43,7 +43,7 @@ body {
   font-size: 2rem;
   margin-bottom: 10px;
 }
-/* Set team backgrounds explicitly using IDs */
+/* Use ID for team backgrounds */
 #red-container {
   grid-area: red;
   background: #b71c1c; /* Dark Red */
@@ -113,7 +113,7 @@ body {
   gap: 10px;
   margin-bottom: 10px;
 }
-/* Minimalist timer buttons (no shadow, no extra background) */
+/* Minimalist timer buttons (no background, no box-shadow) */
 .minimal-btn {
   background: none;
   border: none;
@@ -152,7 +152,7 @@ body {
   padding: 7px 7px;
 }
 
-/* iOS-style buttons for score/penalty controls (apply box-shadow only here) */
+/* iOS-style buttons for score/penalty controls (with box-shadow) */
 .control-btn {
   background: #fff;
   color: #333;
@@ -168,12 +168,7 @@ body {
   background: #ddd;
 }
 
-/* For other buttons (Play, Reset, etc.) use minimal styling (overriding global) */
-button.minimal-btn,
-.footer-bar button,
-.modal button {
-  box-shadow: none;
-}
+/* For other buttons (global), minimal style already defined above for minimal-btn and footer buttons */
 
 /* Modal Overlay */
 .modal-overlay {
@@ -234,7 +229,7 @@ button.minimal-btn,
   margin-top: 15px;
 }
 
-/* Modal close button: Remove shadow */
+/* Modal close button: remove box-shadow */
 .modal-close {
   position: absolute;
   top: 5px;
