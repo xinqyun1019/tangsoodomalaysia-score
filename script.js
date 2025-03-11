@@ -8,13 +8,11 @@ let isRunning = false;
 let timerInterval;
 let currentTime = 0;
 
-// Set currentTime based on current mode
+// Set currentTime based on the current mode
 function updateCurrentTime() {
-  if (isIntervalTimer) {
-    currentTime = roundTime.minutes * 60 + roundTime.seconds;
-  } else {
-    currentTime = matchTime.minutes * 60 + matchTime.seconds;
-  }
+  currentTime = isIntervalTimer
+    ? roundTime.minutes * 60 + roundTime.seconds
+    : matchTime.minutes * 60 + matchTime.seconds;
 }
 
 function updateTimerDisplay() {
@@ -104,7 +102,7 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap innerHTML and swap container classes so that colors swap too.
+  // Swap innerHTML and classes so that colors swap too.
   let redContainer = document.getElementById("red-container");
   let blueContainer = document.getElementById("blue-container");
   let tempHTML = redContainer.innerHTML;
