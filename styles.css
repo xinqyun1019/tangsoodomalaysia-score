@@ -117,7 +117,7 @@ body {
   gap: 10px;
   margin-bottom: 10px;
 }
-/* Minimalist timer buttons: no box-shadow, no extra background */
+/* Minimalist timer buttons */
 .minimal-btn {
   background: none;
   border: none;
@@ -172,7 +172,7 @@ body {
   background: #ddd;
 }
 
-/* For other buttons (minimal style) already defined via minimal-btn and footer buttons */
+/* For other buttons, use minimal styling (no box-shadow) applied via minimal-btn and footer buttons */
 
 /* Modal Overlay */
 .modal-overlay {
