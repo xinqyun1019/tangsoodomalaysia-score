@@ -111,7 +111,7 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Toggle the "swapped" class on the scoreboard so that grid areas swap responsively.
+  // Toggle the "swapped" class on the scoreboard for responsive swapping.
   let scoreboard = document.getElementById("scoreboard");
   scoreboard.classList.toggle("swapped");
 }
