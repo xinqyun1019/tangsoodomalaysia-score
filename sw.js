@@ -6,6 +6,8 @@ const urlsToCache = [
     "/tangsoodomalaysia-score/script.js",  // Change this if your JS file has a different name
 ];
 
+cache.addAll()
+
 // Install event: Cache files when the Service Worker is installed
 self.addEventListener("install", (event) => {
     event.waitUntil(
@@ -15,12 +17,12 @@ self.addEventListener("install", (event) => {
     );
 });
 
-// Fetch event: Serve files from cache when offline
-self.addEventListener("fetch", (event) => {
+self.addEventListener('fetch', event => {
     event.respondWith(
-        caches.match(event.request).then((response) => {
-            return response || fetch(event.request);
-        })
+        caches.match(event.request)
+            .then(response => {
+                return response || fetch(event.request).catch(() => caches.match('/tangsoodomalaysia-score/index.html'));
+            })
     );
 });
 
