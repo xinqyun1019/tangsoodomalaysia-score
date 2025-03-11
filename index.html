@@ -34,13 +34,8 @@
       <!-- Clicking the timer toggles play/pause -->
       <div id="timer-display" onclick="toggleTimer()">02:00</div>
       <div class="timer-buttons">
-        <button id="play-pause-btn" onclick="toggleTimer()">Play</button>
-        <button onclick="resetTimer()">Reset</button>
-      </div>
-      <!-- New toggles moved from footer -->
-      <div class="timer-toggles">
-        <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
-        <button onclick="openSettings()">⚙️</button>
+        <button id="play-pause-btn" onclick="toggleTimer()" class="minimal-btn">Play</button>
+        <button onclick="resetTimer()" class="minimal-btn">Reset</button>
       </div>
     </div>
 
@@ -62,6 +57,12 @@
         <button onclick="updateScore('blue', 1)">➕</button>
       </div>
     </div>
+  </div>
+
+  <!-- Footer Bar -->
+  <div class="footer-bar">
+    <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
+    <button onclick="openSettings()">⚙️</button>
   </div>
 
   <!-- Settings Modal with Overlay -->
@@ -87,7 +88,7 @@
         <div class="settings-row">
           <label for="rest-seconds">Rest Time:</label>
           <div class="input-group">
-            <input type="number" id="rest-seconds" value="60" min="1">
+            <input type="number" id="rest-seconds" value="30" min="1">
             <span>sec</span>
           </div>
         </div>
