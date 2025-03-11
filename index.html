@@ -22,17 +22,17 @@
         <button onclick="updateScore('red', -1)">➖</button>
       </div>
     </div>
-    
+
     <!-- Timer Section -->
     <div class="middle-section">
-      <!-- Clicking the timer toggles play/pause -->
+      <!-- Timer display toggles play/pause on click -->
       <div id="timer-display" onclick="toggleTimer()">02:00</div>
       <div class="timer-buttons">
-        <button onclick="toggleTimer()" id="play-pause-btn">Play</button>
+        <button id="play-pause-btn" onclick="toggleTimer()">Play</button>
         <button onclick="resetTimer()">Reset</button>
       </div>
     </div>
-    
+
     <!-- Blue Team -->
     <div class="team blue" id="blue-container">
       <h2>Blue</h2>
@@ -50,31 +50,40 @@
 
   <!-- Footer Bar -->
   <div class="footer-bar">
-    <button onclick="toggleTimerMode()" id="timer-mode">Match Timer</button>
+    <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
     <button onclick="openSettings()">⚙️</button>
   </div>
 
-  <!-- Settings Modal -->
-  <div id="settings-modal" class="modal hidden">
-    <div class="modal-content">
-      <h2>Settings</h2>
-      <label>Match Timer (Minutes):</label>
-      <input type="number" id="match-minutes" value="2" min="1">
-      <br>
-      <label>Interval Timer (Minutes):</label>
-      <input type="number" id="interval-minutes" value="1" min="1">
-      <br>
-      <label>Rest Time (Seconds):</label>
-      <input type="number" id="rest-seconds" value="60" min="1">
-      <br><br>
-      <button onclick="resetMatchScore()">Reset Match Score</button>
-      <button onclick="resetPenaltyScore()">Reset Penalty Score</button>
-      <button onclick="resetAllScores()">Reset All</button>
-      <br><br>
-      <button onclick="swapSides()">Swap Court</button>
-      <br><br>
-      <button onclick="saveSettings()">Save</button>
-      <button onclick="closeSettings()">Close</button>
+  <!-- Settings Modal (with overlay) -->
+  <div id="settings-overlay" class="modal-overlay hidden">
+    <div id="settings-modal" class="modal">
+      <button class="modal-close" id="modal-close">✖</button>
+      <div class="modal-content">
+        <h2>Settings</h2>
+        <div class="settings-group">
+          <label for="match-minutes">Match Timer (min):</label>
+          <input type="number" id="match-minutes" value="2" min="1">
+        </div>
+        <div class="settings-group">
+          <label for="interval-minutes">Interval Timer (min):</label>
+          <input type="number" id="interval-minutes" value="1" min="1">
+        </div>
+        <div class="settings-group">
+          <label for="rest-seconds">Rest Time (sec):</label>
+          <input type="number" id="rest-seconds" value="60" min="1">
+        </div>
+        <div class="settings-group">
+          <button onclick="resetMatchScore()">Reset Match Score</button>
+          <button onclick="resetPenaltyScore()">Reset Penalty Score</button>
+          <button onclick="resetAllScores()">Reset All</button>
+        </div>
+        <div class="settings-group">
+          <button onclick="swapSides()">Swap Court</button>
+        </div>
+        <div class="settings-group">
+          <button onclick="saveSettings()">Save</button>
+        </div>
+      </div>
     </div>
   </div>
 </body>
