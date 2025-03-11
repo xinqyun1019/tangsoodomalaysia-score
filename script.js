@@ -207,3 +207,14 @@ window.addEventListener('beforeinstallprompt', (e) => {
     }
 });
 
+window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('beforeinstallprompt event fired!');  // Debug log
+    e.preventDefault();
+    deferredPrompt = e;
+
+    const installButton = document.getElementById('install-button');
+    if (installButton) {
+        installButton.style.display = 'block';
+        console.log('Install button should be visible now!');  // Debug log
+    }
+});
