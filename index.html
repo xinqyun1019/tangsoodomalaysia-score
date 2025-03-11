@@ -34,8 +34,8 @@
       <!-- Clicking the timer toggles play/pause -->
       <div id="timer-display" onclick="toggleTimer()">02:00</div>
       <div class="timer-buttons">
-        <button id="play-pause-btn" onclick="toggleTimer()" class="minimal-btn">Play</button>
-        <button onclick="resetTimer()" class="minimal-btn">Reset</button>
+        <button id="play-pause-btn" class="minimal-btn" onclick="toggleTimer()">Play</button>
+        <button class="minimal-btn" onclick="resetTimer()">Reset</button>
       </div>
       <!-- Timer Modification Controls -->
       <button id="toggle-flexi-btn" class="minimal-btn" onclick="toggleFlexiButtons()">⏱</button>
@@ -71,7 +71,7 @@
     </div>
   </div>
 
-  <!-- Footer Bar: Minimalist toggles remain at the bottom -->
+  <!-- Footer Bar: Minimalist toggles -->
   <div class="footer-bar">
     <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
     <button onclick="openSettings()">⚙️</button>
