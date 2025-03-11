@@ -43,7 +43,7 @@ body {
   font-size: 2rem;
   margin-bottom: 10px;
 }
-/* Set team backgrounds via IDs */
+/* Team backgrounds set via IDs */
 #red-container {
   grid-area: red;
   background: #b71c1c; /* Dark Red */
@@ -118,7 +118,7 @@ body {
   gap: 10px;
   margin-bottom: 10px;
 }
-/* Minimalist timer buttons (no background, no box-shadow) */
+/* Minimalist timer buttons: no box-shadow, no extra background */
 .minimal-btn {
   background: none;
   border: none;
@@ -173,7 +173,7 @@ body {
   background: #ddd;
 }
 
-/* For other buttons, minimal style already defined via minimal-btn and footer buttons */
+/* For other buttons, minimal styling applied via minimal-btn and footer buttons */
 
 /* Modal Overlay */
 .modal-overlay {
@@ -258,8 +258,8 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "timer timer"
-      /* When swapped, change order of teams */
       "red blue";
+    gap: 10px;
   }
   .scoreboard.swapped {
     grid-template-areas:
@@ -274,14 +274,14 @@ body {
     width: 100%;
   }
   #timer-display {
-    font-size: 3rem;
-    padding: 10px 20px;
+    font-size: 4.5rem; /* reduced 10% from 5rem */
+    padding: 13.5px 27px; /* reduced 10% from 15px 30px */
   }
   .match-score {
-    font-size: 4rem;
-    padding: 10px;
+    font-size: 5.4rem; /* reduced 10% from 6rem */
+    padding: 18px;     /* reduced 10% from 20px */
   }
   .team h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* reduced 10% from 2rem */
   }
 }
