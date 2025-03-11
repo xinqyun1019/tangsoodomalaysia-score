@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* Using system fonts for an iOS feel */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -13,11 +14,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   min-height: 100vh;
   width: 100%;
+  padding: 10px;
 }
 
-/* Scoreboard layout (full height, responsive width) */
+/* Scoreboard layout: full height and responsive width */
 .scoreboard {
   width: 100%;
   max-width: 1200px;
@@ -46,51 +49,35 @@ body {
 .penalty-section {
   margin-bottom: 10px;
   font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .penalty-label {
   font-weight: bold;
 }
 .penalty-score {
   font-size: 1.2rem;
-  margin-left: 5px;
+  margin: 5px 0;
 }
 .penalty-controls {
-  margin-top: 5px;
   display: flex;
-  justify-content: center;
-  gap: 5px;
+  gap: 10px;
 }
 
-/* Match score and score controls */
+/* Match score and controls */
 .match-score {
   font-size: 6rem;
   font-weight: bold;
   background: black;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
   margin-bottom: 10px;
   text-align: center;
 }
 .score-controls {
   display: flex;
-  justify-content: center;
   gap: 10px;
-}
-
-/* iOS-style button */
-button {
-  background: #555;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 1.2rem;
-  border-radius: 30px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-button:hover {
-  background: #777;
 }
 
 /* Timer Section */
@@ -131,7 +118,44 @@ button:hover {
   padding: 12px 20px;
 }
 
-/* Modal Overlay and Modal */
+/* iOS-style button appearance */
+button {
+  background: #fff;
+  color: #333;
+  border: none;
+  padding: 14px 24px;
+  font-size: 1.2rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+button:hover {
+  background: #ddd;
+}
+
+/* Increase size for score and penalty control buttons */
+.score-controls button,
+.penalty-controls button {
+  padding: 18px 26px;
+  font-size: 1.4rem;
+}
+
+/* Red and Blue specific styling */
+.team.red {
+  background: #b71c1c; /* Dark Red */
+}
+.team.blue {
+  background: #0d47a1; /* Dark Blue */
+}
+.red .match-score {
+  background: #f44336;
+}
+.blue .match-score {
+  background: #2196f3;
+}
+
+/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -155,6 +179,7 @@ button:hover {
 .modal .modal-content {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .modal label {
   margin: 10px 0 5px;
@@ -168,15 +193,18 @@ button:hover {
 }
 .modal .settings-group {
   margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 10px;
 }
+
+/* Modal close button (X at top right) */
 .modal-close {
   position: absolute;
   top: 5px;
-  right: 5px;
+  right: 10px;
   background: transparent;
   border: none;
   font-size: 1.5rem;
@@ -194,10 +222,11 @@ button:hover {
   .scoreboard {
     flex-direction: column;
     align-items: center;
+    padding: 10px;
   }
   .middle-section {
-    width: 100%;
     order: -1;
+    width: 100%;
     margin-bottom: 20px;
   }
   .team {
