@@ -15,17 +15,21 @@
       <div class="penalty-section">
         <span class="penalty-label">Penalty:</span>
         <span class="penalty-score" id="red-penalty">0</span>
+        <div class="penalty-controls">
+          <button onclick="updatePenalty('red', -1)">➖</button>
+          <button onclick="updatePenalty('red', 1)">➕</button>
+        </div>
       </div>
       <div class="match-score" id="red-score">0</div>
       <div class="score-controls">
-        <button onclick="updateScore('red', 1)">➕</button>
         <button onclick="updateScore('red', -1)">➖</button>
+        <button onclick="updateScore('red', 1)">➕</button>
       </div>
     </div>
 
     <!-- Timer Section -->
     <div class="middle-section">
-      <!-- Timer display toggles play/pause on click -->
+      <!-- Clicking the timer toggles play/pause -->
       <div id="timer-display" onclick="toggleTimer()">02:00</div>
       <div class="timer-buttons">
         <button id="play-pause-btn" onclick="toggleTimer()">Play</button>
@@ -39,11 +43,15 @@
       <div class="penalty-section">
         <span class="penalty-label">Penalty:</span>
         <span class="penalty-score" id="blue-penalty">0</span>
+        <div class="penalty-controls">
+          <button onclick="updatePenalty('blue', -1)">➖</button>
+          <button onclick="updatePenalty('blue', 1)">➕</button>
+        </div>
       </div>
       <div class="match-score" id="blue-score">0</div>
       <div class="score-controls">
-        <button onclick="updateScore('blue', 1)">➕</button>
         <button onclick="updateScore('blue', -1)">➖</button>
+        <button onclick="updateScore('blue', 1)">➕</button>
       </div>
     </div>
   </div>
@@ -54,7 +62,7 @@
     <button onclick="openSettings()">⚙️</button>
   </div>
 
-  <!-- Settings Modal (with overlay) -->
+  <!-- Settings Modal with Overlay -->
   <div id="settings-overlay" class="modal-overlay hidden">
     <div id="settings-modal" class="modal">
       <button class="modal-close" id="modal-close">✖</button>
