@@ -1,166 +1,241 @@
-/* Reset default styles */
+/* Reset styles */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: Arial, sans-serif;
 }
 
-/* Body styling */
+/* Body */
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #222;
-  color: white;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background-color: #222;
+color: white;
+text-align: center;
 }
 
-/* Main container */
+/* Main Container */
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 85vh;
+display: flex;
+justify-content: center;
+align-items: center;
+width: 90%;
+max-width: 1200px;
 }
 
-/* Scoreboard styling */
+/* Scoreboard */
 .scoreboard {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
-  max-width: 1000px;
-  background: #333;
-  padding: 20px;
-  border-radius: 10px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 100%;
+background: #333;
+padding: 20px;
+border-radius: 10px;
 }
 
-/* Team styling */
+/* Team Styling */
 .team {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 30%;
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 30%;
 }
 .team h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+font-size: 2rem;
+margin-bottom: 10px;
 }
 
-/* Big score styling */
+/* Big Score */
 .big-score {
-  font-size: 6rem;
-  font-weight: bold;
-  background: black;
-  padding: 20px;
-  border-radius: 10px;
-  min-width: 150px;
-  text-align: center;
+font-size: 6rem;
+font-weight: bold;
+background: black;
+padding: 20px;
+border-radius: 10px;
+min-width: 150px;
+text-align: center;
 }
 .red .big-score {
-  background: red;
+background: red;
 }
 .blue .big-score {
-  background: blue;
+background: blue;
 }
 
-/* Penalty container styling */
+/* Penalty Score */
 .penalty-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+display: flex;
+align-items: center;
+margin-bottom: 10px;
 }
 .small-score {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0 10px;
+font-size: 2rem;
+font-weight: bold;
+margin: 0 10px;
 }
 
-/* Middle Section (Timer) styling */
+/* Middle Section (Timer) */
 .middle-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 40%;
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 40%;
 }
 #timer-display {
-  font-size: 5rem;
-  background: black;
-  padding: 15px 30px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+font-size: 5rem;
+background: black;
+padding: 15px 30px;
+border-radius: 10px;
+margin-bottom: 10px;
 }
 
-/* Timer controls (flexi buttons) styling */
+/* Timer Controls */
 .timer-controls {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+display: flex;
+justify-content: center;
+margin-bottom: 10px;
 }
 .timer-controls button {
-  font-size: 1.2rem;
-  padding: 10px 15px;
-  margin: 5px;
+font-size: 1.2rem;
+padding: 10px 15px;
+margin: 5px;
 }
 
-/* General button styling */
+/* Buttons */
 button {
-  background: #555;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  margin-top: 10px;
-  border-radius: 5px;
+background: #555;
+color: white;
+border: none;
+padding: 10px 20px;
+font-size: 1.2rem;
+cursor: pointer;
+margin-top: 10px;
+border-radius: 5px;
 }
 button:hover {
-  background: #777;
+background: #777;
 }
 
-/* Footer Bar styling */
+/* Footer Bar */
 .footer-bar {
-  display: flex;
-  justify-content: space-around;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #111;
-  padding: 15px 0;
+display: flex;
+justify-content: space-around;
+position: fixed;
+bottom: 0;
+width: 100%;
+background: #111;
+padding: 15px 0;
 }
 .footer-bar button {
-  font-size: 1.2rem;
-  padding: 10px 20px;
+font-size: 1.2rem;
+padding: 10px 20px;
 }
 
-/* Hidden class */
+/* Hidden Class */
 .hidden {
-  display: none;
+display: none;
 }
 
-/* Modal styling for Settings */
+/* Settings Modal */
 .modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #444;
-  padding: 20px;
-  border-radius: 10px;
-  z-index: 1000;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: #444;
+padding: 20px;
+border-radius: 10px;
+z-index: 1000;
+width: 80%;
+max-width: 400px;
 }
 .modal .modal-content {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 }
 .modal label {
-  margin: 10px 0 5px;
+margin: 10px 0 5px;
 }
 .modal input {
-  padding: 5px;
-  margin-bottom: 10px;
-  font-size: 1rem;
+padding: 5px;
+margin-bottom: 10px;
+font-size: 1rem;
+}
+
+/* -------------------------------------- */
+/*            RESPONSIVE STYLES           */
+/* -------------------------------------- */
+
+/* Mobile (Small Screens < 600px) */
+@media screen and (max-width: 600px) {
+.scoreboard {
+flex-direction: column;
+align-items: center;
+padding: 10px;
+}
+
+.team {
+width: 100%;
+margin-bottom: 15px;
+}
+
+.big-score {
+font-size: 4rem;
+min-width: 120px;
+padding: 10px;
+}
+
+.middle-section {
+width: 100%;
+margin-top: 15px;
+}
+
+#timer-display {
+font-size: 3rem;
+padding: 10px 20px;
+}
+
+.footer-bar {
+flex-direction: column;
+align-items: center;
+padding: 10px;
+}
+
+.footer-bar button {
+width: 80%;
+margin-bottom: 5px;
+}
+}
+
+/* Tablet (600px - 900px) */
+@media screen and (max-width: 900px) {
+.scoreboard {
+flex-direction: column;
+padding: 15px;
+}
+
+.team {
+width: 100%;
+margin-bottom: 15px;
+}
+
+.middle-section {
+width: 100%;
+}
+
+#timer-display {
+font-size: 4rem;
+}
+}
+
+/* Large Screens (Desktop > 1200px) */
+@media screen and (min-width: 1200px) {
+.container {
+max-width: 1400px;
+}
 }
