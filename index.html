@@ -31,7 +31,7 @@
 
     <!-- Timer Section -->
     <div class="middle-section" id="timer-section">
-      <!-- Clicking the timer display toggles play/pause -->
+      <!-- Clicking the timer toggles play/pause -->
       <div id="timer-display" onclick="toggleTimer()">02:00</div>
       <div class="timer-buttons">
         <button id="play-pause-btn" onclick="toggleTimer()">Play</button>
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <!-- Footer Bar (Minimalist style) -->
+  <!-- Footer Bar (Minimalist) -->
   <div class="footer-bar">
     <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
     <button onclick="openSettings()">⚙️</button>
@@ -68,6 +68,7 @@
   <!-- Settings Modal with Overlay -->
   <div id="settings-overlay" class="modal-overlay hidden">
     <div id="settings-modal" class="modal">
+      <!-- Now functions as Save & Close -->
       <button class="modal-close" id="modal-close">✖</button>
       <div class="modal-content">
         <h2>Settings</h2>
@@ -99,9 +100,6 @@
         <div class="settings-row two-col">
           <button onclick="resetAllScores()">Reset All</button>
           <button onclick="swapSides()">Swap Court</button>
-        </div>
-        <div class="settings-row">
-          <button onclick="saveSettings()">Save</button>
         </div>
       </div>
     </div>
