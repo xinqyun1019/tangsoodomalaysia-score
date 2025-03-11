@@ -82,6 +82,19 @@ function adjustTimer(type, value) {
   updateTimerDisplay();
 }
 
+function toggleFlexiButtons() {
+  if (isRunning) return;
+  let flexiButtons = document.getElementById("flexi-buttons");
+  let toggleBtn = document.getElementById("toggle-flexi-btn");
+  if (flexiButtons.classList.contains("hidden")) {
+    flexiButtons.classList.remove("hidden");
+    toggleBtn.textContent = "Hide Adjustments";
+  } else {
+    flexiButtons.classList.add("hidden");
+    toggleBtn.textContent = "⏱";
+  }
+}
+
 function updateScore(team, value) {
   let scoreEl = document.getElementById(team + "-score");
   let currentScore = parseInt(scoreEl.textContent);
@@ -102,17 +115,13 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap team nodes by reordering in the DOM and explicitly set background colors by ID.
+  // Use previous working swap: swap innerHTML, then explicitly set backgrounds using IDs.
   let red = document.getElementById("red-container");
   let blue = document.getElementById("blue-container");
-  let parent = red.parentElement;
-  // Swap positions:
-  if (red.compareDocumentPosition(blue) & Node.DOCUMENT_POSITION_FOLLOWING) {
-    parent.insertBefore(blue, red);
-  } else {
-    parent.insertBefore(red, blue);
-  }
-  // Explicitly set backgrounds via IDs to enforce correct colors.
+  let tempHTML = red.innerHTML;
+  red.innerHTML = blue.innerHTML;
+  blue.innerHTML = tempHTML;
+  // Reapply background colors via inline styles using the IDs.
   document.getElementById("red-container").style.background = "#b71c1c"; // Dark Red
   document.getElementById("blue-container").style.background = "#0d47a1"; // Dark Blue
 }
@@ -123,7 +132,7 @@ function openSettings() {
 }
 
 function closeSettings() {
-  // Auto-save settings on close
+  // Auto-save settings when closing
   saveSettings();
 }
 
