@@ -102,26 +102,19 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap the team nodes by reordering in the parent container
+  // Swap team nodes by reordering them in the DOM, then force background colors by id.
   let red = document.getElementById("red-container");
   let blue = document.getElementById("blue-container");
   let parent = red.parentElement;
-  // Swap positions in DOM
+  // Swap nodes if red is before blue.
   if (red.compareDocumentPosition(blue) & Node.DOCUMENT_POSITION_FOLLOWING) {
     parent.insertBefore(blue, red);
   } else {
     parent.insertBefore(red, blue);
   }
-  // Swap color classes: use a temporary placeholder
-  if (red.classList.contains("red")) {
-    red.classList.replace("red", "tempColor");
-    blue.classList.replace("blue", "red");
-    red.classList.replace("tempColor", "blue");
-  } else {
-    red.classList.replace("blue", "tempColor");
-    blue.classList.replace("red", "blue");
-    red.classList.replace("tempColor", "red");
-  }
+  // Now force background color changes via id
+  document.getElementById("red-container").style.background = "#b71c1c"; // Dark Red
+  document.getElementById("blue-container").style.background = "#0d47a1"; // Dark Blue
 }
 
 function openSettings() {
@@ -130,7 +123,7 @@ function openSettings() {
 }
 
 function closeSettings() {
-  // Auto-save on close
+  // Auto-save settings when closing
   saveSettings();
 }
 
