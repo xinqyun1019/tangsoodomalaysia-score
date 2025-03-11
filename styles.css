@@ -17,66 +17,21 @@ body {
   min-height: 100vh;
 }
 
-/* Main container */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-}
-
-/* Scoreboard styling */
+/* Scoreboard layout */
 .scoreboard {
+  width: 90%;
+  max-width: 1000px;
   background: #333;
-  border-radius: 10px;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Timer Container */
-.timer-container, .timer-container * {
-  transition: all 0.3s ease;
-}
-.timer-container {
-  margin-bottom: 20px;
-}
-.timer-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#timer-display {
-  font-size: 5rem;
-  background: black;
-  padding: 15px 30px;
   border-radius: 10px;
-  margin: 10px 0;
-  cursor: pointer;
-}
-.timer-controls {
   display: flex;
-  justify-content: center;
-  margin: 5px 0;
-}
-.timer-controls button {
-  font-size: 1.2rem;
-  padding: 10px 15px;
-  margin: 5px;
-}
-
-/* Teams Container */
-.teams-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Team styling */
 .team {
-  flex: 1;
-  min-width: 250px;
-  margin: 10px;
+  width: 30%;
   background: #444;
   padding: 10px;
   border-radius: 10px;
@@ -86,48 +41,55 @@ body {
   margin-bottom: 10px;
 }
 
-/* Match Score */
-.match-score {
+/* Penalty section */
+.penalty-section {
+  font-size: 0.9rem;
   margin-bottom: 10px;
 }
-.big-score {
+.penalty-label {
+  font-weight: bold;
+}
+.penalty-score {
+  font-size: 1.2rem;
+  margin-left: 5px;
+}
+
+/* Match score and controls */
+.match-score {
   font-size: 6rem;
   font-weight: bold;
   background: black;
   padding: 20px;
   border-radius: 10px;
-  min-width: 120px;
-  text-align: center;
+  margin-bottom: 10px;
 }
-.red .big-score {
-  background: red;
-}
-.blue .big-score {
-  background: blue;
-}
-
-/* Score Controls */
 .score-controls {
   display: flex;
   justify-content: center;
   gap: 10px;
 }
 
-/* Penalty Section */
-.penalty-section {
-  margin-top: 10px;
+/* Middle Section (Timer) */
+.middle-section {
+  width: 30%;
+  background: #444;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.penalty-label {
-  font-size: 1rem;
-  margin-right: 5px;
+#timer-display {
+  font-size: 5rem;
+  background: black;
+  padding: 15px 30px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
-.penalty-section .small-score {
-  font-size: 1.5rem;
-}
-.penalty-controls {
-  display: inline-flex;
-  gap: 5px;
-  margin-left: 5px;
+.timer-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 /* Footer Bar */
@@ -140,14 +102,19 @@ body {
   display: flex;
   justify-content: space-around;
 }
-.footer-bar button {
-  font-size: 1.2rem;
-  padding: 10px 20px;
-}
 
-/* Flexi adjustments toggle */
-#flexi-buttons {
-  margin-bottom: 10px;
+/* Buttons */
+button {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background: #777;
 }
 
 /* Modal for Settings */
@@ -181,44 +148,34 @@ body {
   display: none;
 }
 
-/* Responsive Styles */
-
-/* Mobile (max-width: 600px) */
+/* Responsive styles */
 @media (max-width: 600px) {
-  /* On mobile, show timer on top and teams below side by side */
   .scoreboard {
     flex-direction: column;
+    align-items: center;
   }
-  .timer-container {
-    order: 1;
-  }
-  .teams-container {
-    order: 2;
-    flex-direction: row;
-    justify-content: space-around;
+  .middle-section {
+    order: -1;
+    width: 100%;
+    margin-bottom: 20px;
   }
   .team {
-    min-width: 45%;
+    width: 45%;
+    margin: 5px;
+  }
+  .scoreboard {
+    justify-content: center;
+    flex-wrap: wrap;
   }
   #timer-display {
     font-size: 3rem;
     padding: 10px 20px;
   }
-  .big-score {
+  .match-score {
     font-size: 4rem;
     padding: 10px;
   }
   .team h2 {
     font-size: 1.5rem;
-  }
-}
-
-/* Tablet (max-width: 900px) */
-@media (max-width: 900px) {
-  #timer-display {
-    font-size: 4rem;
-  }
-  .big-score {
-    font-size: 5rem;
   }
 }
