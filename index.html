@@ -11,29 +11,28 @@
   <!-- Scoreboard -->
   <div class="scoreboard">
     <!-- Red Team -->
-    <div class="team red" id="red-container">
+    <div class="team" id="red-container">
       <h2>Red</h2>
       <div class="penalty-section">
         <span class="penalty-label">Penalty:</span>
         <span class="penalty-score" id="red-penalty">0</span>
         <div class="penalty-controls">
-          <button onclick="updatePenalty('red', -1)">➖</button>
-          <button onclick="updatePenalty('red', 1)">➕</button>
+          <button class="control-btn" onclick="updatePenalty('red', -1)">➖</button>
+          <button class="control-btn" onclick="updatePenalty('red', 1)">➕</button>
         </div>
       </div>
       <!-- Clicking the score adds 1 point -->
       <div class="match-score" id="red-score" onclick="updateScore('red', 1)">0</div>
       <div class="score-controls">
-        <button onclick="updateScore('red', -1)">➖</button>
-        <button onclick="updateScore('red', 1)">➕</button>
+        <button class="control-btn" onclick="updateScore('red', -1)">➖</button>
+        <button class="control-btn" onclick="updateScore('red', 1)">➕</button>
       </div>
     </div>
 
     <!-- Timer Section -->
     <div class="middle-section" id="timer-section">
-      <!-- Timer display toggles play/pause on click -->
+      <!-- Clicking the timer toggles play/pause -->
       <div id="timer-display" onclick="toggleTimer()">02:00</div>
-      <!-- Minimalist timer buttons (no shadow) -->
       <div class="timer-buttons">
         <button id="play-pause-btn" onclick="toggleTimer()" class="minimal-btn">Play</button>
         <button onclick="resetTimer()" class="minimal-btn">Reset</button>
@@ -42,38 +41,37 @@
       <button id="toggle-flexi-btn" class="minimal-btn" onclick="toggleFlexiButtons()">⏱</button>
       <div id="flexi-buttons" class="flexi-buttons hidden">
         <div class="timer-controls">
-          <button onclick="adjustTimer('minutes', 1)" class="minimal-btn">➕Min</button>
-          <button onclick="adjustTimer('seconds', 1)" class="minimal-btn">➕1s</button>
+          <button class="minimal-btn" onclick="adjustTimer('minutes', 1)">➕Min</button>
+          <button class="minimal-btn" onclick="adjustTimer('seconds', 1)">➕1s</button>
         </div>
         <div class="timer-controls">
-          <button onclick="adjustTimer('minutes', -1)" class="minimal-btn">➖Min</button>
-          <button onclick="adjustTimer('seconds', -1)" class="minimal-btn">➖1s</button>
+          <button class="minimal-btn" onclick="adjustTimer('minutes', -1)">➖Min</button>
+          <button class="minimal-btn" onclick="adjustTimer('seconds', -1)">➖1s</button>
         </div>
       </div>
-      <!-- Minimalist toggles for Match Timer and Settings are in the footer (see below) -->
     </div>
 
     <!-- Blue Team -->
-    <div class="team blue" id="blue-container">
+    <div class="team" id="blue-container">
       <h2>Blue</h2>
       <div class="penalty-section">
         <span class="penalty-label">Penalty:</span>
         <span class="penalty-score" id="blue-penalty">0</span>
         <div class="penalty-controls">
-          <button onclick="updatePenalty('blue', -1)">➖</button>
-          <button onclick="updatePenalty('blue', 1)">➕</button>
+          <button class="control-btn" onclick="updatePenalty('blue', -1)">➖</button>
+          <button class="control-btn" onclick="updatePenalty('blue', 1)">➕</button>
         </div>
       </div>
       <!-- Clicking the score adds 1 point -->
       <div class="match-score" id="blue-score" onclick="updateScore('blue', 1)">0</div>
       <div class="score-controls">
-        <button onclick="updateScore('blue', -1)">➖</button>
-        <button onclick="updateScore('blue', 1)">➕</button>
+        <button class="control-btn" onclick="updateScore('blue', -1)">➖</button>
+        <button class="control-btn" onclick="updateScore('blue', 1)">➕</button>
       </div>
     </div>
   </div>
 
-  <!-- Footer Bar: Minimalist toggles placed at the bottom of the timer section -->
+  <!-- Footer Bar (Minimalist style) -->
   <div class="footer-bar">
     <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
     <button onclick="openSettings()">⚙️</button>
@@ -107,12 +105,12 @@
           </div>
         </div>
         <div class="settings-row two-col">
-          <button onclick="resetMatchScore()">Reset Match</button>
-          <button onclick="resetPenaltyScore()">Reset Penalty</button>
+          <button class="modal-btn control-btn" onclick="resetMatchScore()">Reset Match</button>
+          <button class="modal-btn control-btn" onclick="resetPenaltyScore()">Reset Penalty</button>
         </div>
         <div class="settings-row two-col">
-          <button onclick="resetAllScores()">Reset All</button>
-          <button onclick="swapSides()">Swap Court</button>
+          <button class="modal-btn control-btn" onclick="resetAllScores()">Reset All</button>
+          <button class="modal-btn control-btn" onclick="swapSides()">Swap Court</button>
         </div>
       </div>
     </div>
