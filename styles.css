@@ -164,9 +164,10 @@ body {
   background: #fff;
   color: #333;
   border: none;
-  padding: 18px 26px;
-  font-size: 1.4rem;
-  border-radius: 100px;
+  padding: 11px 21px;
+  font-size: 17px;
+  font-weight: 400;
+  border-radius: 980px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   cursor: pointer;
   transition: background 0.2s ease;
