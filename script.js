@@ -1,14 +1,14 @@
 // Timer settings objects
 let matchTime = { minutes: 2, seconds: 0 };
-let roundTime = { minutes: 2, seconds: 0 };
-let restTime = { seconds: 30 };
+let roundTime = { minutes: 1, seconds: 0 };  // default interval timer = 1 min
+let restTime = { seconds: 60 };
 
 let isIntervalTimer = false;
 let isRunning = false;
 let timerInterval;
-let currentTime = 0; // current timer value in seconds
+let currentTime = 0;
 
-// Set currentTime based on the mode and settings
+// Set currentTime based on current mode
 function updateCurrentTime() {
   if (isIntervalTimer) {
     currentTime = roundTime.minutes * 60 + roundTime.seconds;
@@ -21,7 +21,7 @@ function updateTimerDisplay() {
   let minutes = Math.floor(currentTime / 60);
   let seconds = currentTime % 60;
   document.getElementById("timer-display").textContent =
-    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
 function toggleTimerMode() {
@@ -44,7 +44,7 @@ function toggleFlexiButtons() {
 }
 
 function adjustTimer(type, value) {
-  if (isRunning) return; // Prevent adjustments when timer is running
+  if (isRunning) return;
   let time = isIntervalTimer ? roundTime : matchTime;
   if (type === "seconds") {
     time.seconds = Math.max(0, time.seconds + value);
@@ -71,9 +71,10 @@ function startTimer() {
   if (isRunning) return;
   isRunning = true;
   document.getElementById("play-pause-btn").textContent = "Pause";
-  // Hide flexi buttons when timer starts
+  // Hide flexi adjustments when timer starts
   document.getElementById("flexi-buttons").classList.add("hidden");
   document.getElementById("toggle-flexi-btn").textContent = "⏱";
+  
   timerInterval = setInterval(() => {
     if (currentTime <= 0) {
       clearInterval(timerInterval);
@@ -119,13 +120,14 @@ function updateScore(team, value) {
   scoreEl.textContent = Math.max(0, currentScore + value);
 }
 
-// Swap Sides: swap inner HTML and classes to swap the court colors
+// Swap Sides: swap inner HTML and swap container classes to swap colors
 function swapSides() {
   let redContainer = document.getElementById("red-container");
   let blueContainer = document.getElementById("blue-container");
   let tempHTML = redContainer.innerHTML;
   redContainer.innerHTML = blueContainer.innerHTML;
   blueContainer.innerHTML = tempHTML;
+  // Swap classes for color (red <-> blue)
   if (redContainer.classList.contains("red")) {
     redContainer.classList.remove("red");
     redContainer.classList.add("blue");
@@ -139,7 +141,6 @@ function swapSides() {
   }
 }
 
-// Settings Modal Functions
 function openSettings() {
   let modal = document.getElementById("settings-modal");
   modal.classList.remove("hidden");
@@ -188,6 +189,6 @@ function resetAllScores() {
   resetPenaltyScore();
 }
 
-// Initialize currentTime based on default settings and update display
+// Initialize timer on load
 updateCurrentTime();
 updateTimerDisplay();
