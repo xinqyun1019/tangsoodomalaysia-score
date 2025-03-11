@@ -19,7 +19,7 @@ body {
   padding: 10px;
 }
 
-/* Scoreboard layout: full height up to footer space */
+/* Scoreboard layout: full height up to footer */
 .scoreboard {
   width: 100%;
   max-width: 1200px;
@@ -112,28 +112,45 @@ body {
   gap: 10px;
   margin-bottom: 10px;
 }
-.timer-toggles {
-  display: flex;
-  gap: 20px;
-}
-
-/* Minimalist toggles in timer section */
-.timer-toggles button {
+/* Minimalist buttons in timer section */
+.timer-buttons button {
   background: none;
   border: none;
   font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.timer-buttons button:hover {
   color: #fff;
+}
+
+/* Footer Bar: Minimalist, with no extra styling */
+.footer-bar {
+  width: 100%;
+  background-color: #222;
+  border-top: 1px solid #555;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+}
+.footer-bar button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: white;
+  padding: 5px;
   cursor: pointer;
   transition: color 0.2s ease, padding 0.2s ease;
 }
-.timer-toggles button:hover {
+.footer-bar button:hover {
   color: #000;
   padding: 7px 7px;
 }
 
-/* Footer removed; toggles moved into timer section */
-
-/* iOS-style buttons for score/penalty (non-toggle) */
+/* iOS-style buttons for other areas */
 button {
   background: #fff;
   color: #333;
@@ -214,7 +231,7 @@ button:hover {
   margin-top: 15px;
 }
 
-/* Modal close button (Save & Close functionality) */
+/* Modal close button: Remove shadow */
 .modal-close {
   position: absolute;
   top: 5px;
@@ -224,6 +241,7 @@ button:hover {
   font-size: 1.5rem;
   color: white;
   cursor: pointer;
+  box-shadow: none;
 }
 
 /* Hidden class */
