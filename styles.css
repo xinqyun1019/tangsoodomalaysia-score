@@ -212,7 +212,7 @@ font-size: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 .settings-row .input-group {
   display: flex;
@@ -238,7 +238,7 @@ font-size: 1rem;
   margin-bottom: 15px;
 }
 .modal .settings-row:last-child {
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 /* Modal close button: minimal style, no box-shadow */
