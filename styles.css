@@ -176,7 +176,7 @@ body {
 }
 
 .modal-btn {
-font-size 1rem
+font-size: 1rem;
 }
 
 /* For other buttons, minimal styling already applied via minimal-btn and footer buttons */
@@ -294,7 +294,7 @@ font-size 1rem
     font-size: 1.8rem; /* Reduced 10% from 2rem */
   }
 
-  .control-btn {
+  .control-btn, .modal-btn {
     font-size: 0.9rem;
   }
 }
