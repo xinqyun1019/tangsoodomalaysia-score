@@ -36,8 +36,7 @@ function startTimer() {
   if (isRunning) return;
   isRunning = true;
   document.getElementById("play-pause-btn").textContent = "Pause";
-  // Hide any timer adjustment buttons when running (if any)
-  document.getElementById("toggle-flexi-btn")?.classList.add("hidden");
+  // Optionally, hide any adjustment controls when running
   timerInterval = setInterval(() => {
     if (currentTime <= 0) {
       clearInterval(timerInterval);
@@ -125,7 +124,6 @@ function swapSides() {
   }
 }
 
-// Modal functionality
 function openSettings() {
   let overlay = document.getElementById("settings-overlay");
   overlay.classList.remove("hidden");
@@ -172,14 +170,14 @@ function resetAllScores() {
   resetPenaltyScore();
 }
 
-// Close modal if clicking outside the modal content
+// Close modal when clicking outside modal content
 document.getElementById("settings-overlay").addEventListener("click", function(e) {
   if (e.target === this) {
     closeSettings();
   }
 });
 
-// Close modal if clicking the X button
+// Close modal when clicking the X button
 document.getElementById("modal-close").addEventListener("click", function() {
   closeSettings();
 });
