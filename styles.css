@@ -155,8 +155,7 @@ body {
   transition: color 0.2s ease, padding 0.2s ease;
 }
 .footer-bar button:hover {
-  color: #000;
-  padding: 7px 7px;
+  color: #999;
 }
 
 /* iOS-style control buttons for score/penalty (with box-shadow) */
