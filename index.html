@@ -86,21 +86,25 @@
         <div class="settings-row">
           <label for="match-minutes">Match Timer:</label>
           <div class="input-group">
-            <input type="number" id="match-minutes" value="2" min="1">
+            <input type="number" id="match-minutes" value="2" min="0">
             <span>min</span>
+            <input type="number" id="match-seconds" value="0" min="0" max="59">
+            <span>sec</span>
           </div>
         </div>
         <div class="settings-row">
           <label for="interval-minutes">Interval Timer:</label>
           <div class="input-group">
-            <input type="number" id="interval-minutes" value="1" min="1">
+            <input type="number" id="interval-minutes" value="1" min="0">
             <span>min</span>
+            <input type="number" id="interval-seconds" value="0" min="0" max="59">
+            <span>sec</span>
           </div>
         </div>
         <div class="settings-row">
           <label for="rest-seconds">Rest Time:</label>
           <div class="input-group">
-            <input type="number" id="rest-seconds" value="30" min="1">
+            <input type="number" id="rest-seconds" value="30" min="0">
             <span>sec</span>
           </div>
         </div>
