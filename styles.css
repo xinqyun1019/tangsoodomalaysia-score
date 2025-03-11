@@ -178,6 +178,7 @@ body {
 
 .modal-btn {
 font-size: 1rem;
+width: 100%;
 }
 
 /* For other buttons, minimal styling already applied via minimal-btn and footer buttons */
@@ -228,6 +229,9 @@ font-size: 1rem;
   width: 50px;
   padding: 5px;
   font-size: 1rem;
+  background-color: #555;
+  color: white;
+  border-radius: 6px;
 }
 .two-col {
   display: flex;
