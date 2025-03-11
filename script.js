@@ -71,7 +71,7 @@ function toggleTimerMode() {
 
 function adjustTimer(type, value) {
   if (isRunning) return;
-  // Adjust the currentTime directly
+  // Directly add the value to currentTime (preserving current minutes and seconds)
   if (type === "seconds") {
     currentTime = Math.max(0, currentTime + value);
   } else if (type === "minutes") {
@@ -112,7 +112,7 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap the grid areas by toggling a class on the scoreboard.
+  // Toggle the "swapped" class on the scoreboard.
   let scoreboard = document.getElementById("scoreboard");
   scoreboard.classList.toggle("swapped");
 }
