@@ -8,13 +8,9 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>Tang Soo Do Malaysia Scoreboard</h1>
-  </header>
-
-  <!-- Scoreboard using CSS Grid -->
+  <!-- Scoreboard (no header) -->
   <div class="scoreboard">
-    <!-- Red Team (Grid Area: red) -->
+    <!-- Red Team -->
     <div class="team red" id="red-container">
       <h2>Red</h2>
       <div class="penalty-section">
@@ -32,9 +28,9 @@
       </div>
     </div>
 
-    <!-- Timer Section (Grid Area: timer) -->
-    <div class="middle-section" id="timer-section">
-      <!-- Clicking the timer display toggles play/pause -->
+    <!-- Timer Section -->
+    <div class="middle-section">
+      <!-- Clicking the timer toggles play/pause -->
       <div id="timer-display" onclick="toggleTimer()">02:00</div>
       <div class="timer-buttons">
         <button id="play-pause-btn" onclick="toggleTimer()">Play</button>
@@ -42,7 +38,7 @@
       </div>
     </div>
 
-    <!-- Blue Team (Grid Area: blue) -->
+    <!-- Blue Team -->
     <div class="team blue" id="blue-container">
       <h2>Blue</h2>
       <div class="penalty-section">
@@ -61,7 +57,7 @@
     </div>
   </div>
 
-  <!-- Footer Bar -->
+  <!-- Footer Bar (minimalist style) -->
   <div class="footer-bar">
     <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
     <button onclick="openSettings()">⚙️</button>
