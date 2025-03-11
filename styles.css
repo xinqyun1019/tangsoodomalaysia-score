@@ -19,26 +19,19 @@ body {
   padding: 10px;
 }
 
-/* Header */
-header h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-/* Scoreboard layout using CSS Grid */
+/* Scoreboard layout: full height up to footer */
 .scoreboard {
-  display: grid;
   width: 100%;
   max-width: 1200px;
-  flex: 1;
+  /* Subtract footer height (assumed 70px) from full viewport height */
+  min-height: calc(100vh - 70px);
   background: #333;
   padding: 20px;
   border-radius: 10px;
-  gap: 20px;
-  /* Desktop: three columns */
+  display: grid;
   grid-template-columns: 1fr auto 1fr;
-  grid-template-areas: 
-    "red timer blue";
+  grid-template-areas: "red timer blue";
+  gap: 20px;
 }
 
 /* Team styling */
@@ -119,22 +112,27 @@ header h1 {
   gap: 10px;
 }
 
-/* Footer Bar */
+/* Footer Bar: minimalist style */
 .footer-bar {
   width: 100%;
-  background: #111;
-  padding: 15px 0;
   position: fixed;
   bottom: 0;
+  background: #111;
+  border-top: 1px solid #555;
+  padding: 10px 0;
   display: flex;
   justify-content: space-around;
 }
 .footer-bar button {
+  background: none;
+  border: none;
   font-size: 1.2rem;
-  padding: 12px 20px;
+  color: white;
+  padding: 5px;
+  cursor: pointer;
 }
 
-/* iOS-style buttons */
+/* iOS-style button appearance for non-footer buttons */
 button {
   background: #fff;
   color: #333;
@@ -221,7 +219,6 @@ button:hover {
 /* Responsive Styles */
 @media (max-width: 600px) {
   .scoreboard {
-    /* For mobile, use grid with two rows: timer on top, teams side by side */
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "timer timer"
