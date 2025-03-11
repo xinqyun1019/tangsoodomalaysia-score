@@ -26,6 +26,9 @@ function toggleTimer() {
   if (isRunning) {
     pauseTimer();
   } else {
+    // Hide timer modifier controls when starting
+    document.getElementById("flexi-buttons").classList.add("hidden");
+    document.getElementById("toggle-flexi-btn").textContent = "⏱";
     startTimer();
   }
 }
@@ -84,13 +87,13 @@ function adjustTimer(type, value) {
 
 function toggleFlexiButtons() {
   if (isRunning) return;
-  let flexiButtons = document.getElementById("flexi-buttons");
+  let flexi = document.getElementById("flexi-buttons");
   let toggleBtn = document.getElementById("toggle-flexi-btn");
-  if (flexiButtons.classList.contains("hidden")) {
-    flexiButtons.classList.remove("hidden");
+  if (flexi.classList.contains("hidden")) {
+    flexi.classList.remove("hidden");
     toggleBtn.textContent = "Hide Adjustments";
   } else {
-    flexiButtons.classList.add("hidden");
+    flexi.classList.add("hidden");
     toggleBtn.textContent = "⏱";
   }
 }
@@ -115,15 +118,19 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Use previous working swap: swap innerHTML, then explicitly set backgrounds using IDs.
+  // Swap the IDs of the two team containers.
   let red = document.getElementById("red-container");
   let blue = document.getElementById("blue-container");
-  let tempHTML = red.innerHTML;
-  red.innerHTML = blue.innerHTML;
-  blue.innerHTML = tempHTML;
-  // Reapply background colors via inline styles using the IDs.
-  document.getElementById("red-container").style.background = "#b71c1c"; // Dark Red
-  document.getElementById("blue-container").style.background = "#0d47a1"; // Dark Blue
+  // Swap ID attributes
+  let tempID = red.id;
+  red.id = blue.id;
+  blue.id = tempID;
+  // Also swap the team header texts
+  let redHeader = red.querySelector("h2");
+  let blueHeader = blue.querySelector("h2");
+  let tempText = redHeader.textContent;
+  redHeader.textContent = blueHeader.textContent;
+  blueHeader.textContent = tempText;
 }
 
 function openSettings() {
@@ -132,7 +139,7 @@ function openSettings() {
 }
 
 function closeSettings() {
-  // Auto-save settings when closing
+  // Auto-save settings on close
   saveSettings();
 }
 
@@ -144,8 +151,7 @@ function saveSettings() {
   restTime.seconds = parseInt(document.getElementById("rest-seconds").value);
   updateCurrentTime();
   updateTimerDisplay();
-  let overlay = document.getElementById("settings-overlay");
-  overlay.classList.add("hidden");
+  document.getElementById("settings-overlay").classList.add("hidden");
 }
 
 function resetMatchScore() {
