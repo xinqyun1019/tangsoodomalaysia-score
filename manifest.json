@@ -5,15 +5,15 @@
   "start_url": "/tangsoodomalaysia-score/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#007bff",
+  "theme_color": "#1a175f",
   "icons": [
     {
-      "src": "/tangsoodomalaysia-score/icon-192x192.png",
+      "src": "/tangsoodomalaysia-score/tan-aik-teng-sibu.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/tangsoodomalaysia-score/icon-512x512.png",
+      "src": "/tangsoodomalaysia-score/tan-aik-teng-sibu.png",
       "sizes": "512x512",
       "type": "image/png"
     }
