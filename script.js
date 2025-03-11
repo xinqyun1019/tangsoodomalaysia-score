@@ -26,7 +26,7 @@ function toggleTimer() {
   if (isRunning) {
     pauseTimer();
   } else {
-    // Hide timer modification controls when starting
+    // Hide timer modifier controls when starting
     document.getElementById("flexi-buttons").classList.add("hidden");
     document.getElementById("toggle-flexi-btn").textContent = "⏱";
     startTimer();
@@ -71,7 +71,7 @@ function toggleTimerMode() {
 
 function adjustTimer(type, value) {
   if (isRunning) return;
-  // Adjust currentTime directly so that the current timer is modified.
+  // Adjust the currentTime directly
   if (type === "seconds") {
     currentTime = Math.max(0, currentTime + value);
   } else if (type === "minutes") {
@@ -100,7 +100,6 @@ function updateScore(team, value) {
 }
 
 function updatePenalty(team, value) {
-  // Penalty for a team adds/subtracts from opponent's score.
   let penaltyEl = document.getElementById(team + "-penalty");
   let opponent = team === "red" ? "blue" : "red";
   let opponentScoreEl = document.getElementById(opponent + "-score");
@@ -113,12 +112,9 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap the IDs of the team containers so that CSS applies correct backgrounds.
-  let red = document.getElementById("red-container");
-  let blue = document.getElementById("blue-container");
-  let tempId = red.id;
-  red.id = blue.id;
-  blue.id = tempId;
+  // Swap the grid areas by toggling a class on the scoreboard.
+  let scoreboard = document.getElementById("scoreboard");
+  scoreboard.classList.toggle("swapped");
 }
 
 function openSettings() {
