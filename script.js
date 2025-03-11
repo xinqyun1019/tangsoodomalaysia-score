@@ -36,7 +36,6 @@ function startTimer() {
   if (isRunning) return;
   isRunning = true;
   document.getElementById("play-pause-btn").textContent = "Pause";
-  // Optionally, hide any adjustment controls when running
   timerInterval = setInterval(() => {
     if (currentTime <= 0) {
       clearInterval(timerInterval);
