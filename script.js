@@ -10,9 +10,11 @@ let currentTime = 0;
 
 // Set currentTime based on the current mode
 function updateCurrentTime() {
-  currentTime = isIntervalTimer
-    ? roundTime.minutes * 60 + roundTime.seconds
-    : matchTime.minutes * 60 + matchTime.seconds;
+  if (isIntervalTimer) {
+    currentTime = roundTime.minutes * 60 + roundTime.seconds;
+  } else {
+    currentTime = matchTime.minutes * 60 + matchTime.seconds;
+  }
 }
 
 function updateTimerDisplay() {
