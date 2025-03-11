@@ -177,6 +177,13 @@ document.getElementById("modal-close").addEventListener("click", function() {
 updateCurrentTime();
 updateTimerDisplay();
 
+//Service Workers
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/tangsoodomalaysia-score/sw.js')
+    .then(reg => console.log("Service Worker registered!", reg))
+    .catch(err => console.log("Service Worker registration failed:", err));
+}
+
 //Install Prompt
 
 let deferredPrompt;
