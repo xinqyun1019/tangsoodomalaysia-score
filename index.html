@@ -132,14 +132,13 @@ if ('serviceWorker' in navigator) {
     .catch(err => console.log("Service Worker registration failed:", err));
 }
 
-//Install Prompt
-
+// Install Prompt
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    
+
     // Show the install button when the event is fired
     const installButton = document.getElementById('install-button');
     if (installButton) {
@@ -161,14 +160,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
         });
     }
 });
-    
 
-    const installButton = document.getElementById('install-button');
-    if (installButton) {
-        installButton.style.display = 'block';
-        console.log('Install button should be visible now!');  // Debug log
-    }
-});
 </script>
   
 </html>
