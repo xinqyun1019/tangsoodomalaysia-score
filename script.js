@@ -8,7 +8,7 @@ let isRunning = false;
 let timerInterval;
 let currentTime = 0;
 
-// Set currentTime based on current mode
+// Set currentTime based on the current mode
 function updateCurrentTime() {
   if (isIntervalTimer) {
     currentTime = roundTime.minutes * 60 + roundTime.seconds;
@@ -104,23 +104,22 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap the red and blue team nodes by swapping their positions in the parent container.
-  let red = document.getElementById("red-container");
-  let blue = document.getElementById("blue-container");
-  let parent = red.parentElement;
+  // Swap team containers and their color classes.
+  let redContainer = document.getElementById("red-container");
+  let blueContainer = document.getElementById("blue-container");
+  let parent = redContainer.parentElement;
   // Swap nodes:
-  parent.insertBefore(blue, red);
-  // Swap their color classes so that the backgrounds swap:
-  if (red.classList.contains("red")) {
-    red.classList.remove("red");
-    red.classList.add("blue");
-    blue.classList.remove("blue");
-    blue.classList.add("red");
+  parent.insertBefore(blueContainer, redContainer);
+  // Now swap color classes.
+  let redIsRed = redContainer.classList.contains("red");
+  redContainer.classList.remove("red", "blue");
+  blueContainer.classList.remove("red", "blue");
+  if (redIsRed) {
+    redContainer.classList.add("blue");
+    blueContainer.classList.add("red");
   } else {
-    red.classList.remove("blue");
-    red.classList.add("red");
-    blue.classList.remove("red");
-    blue.classList.add("blue");
+    redContainer.classList.add("red");
+    blueContainer.classList.add("blue");
   }
 }
 
