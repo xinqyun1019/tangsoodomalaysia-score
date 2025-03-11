@@ -1,9 +1,9 @@
 const CACHE_NAME = "offline-cache-v1";
 const urlsToCache = [
     "/",
-    "/index.html",
-    "/styles.css",  // Change this if your CSS file has a different name
-    "/script.js",  // Change this if your JS file has a different name
+    "/tangsoodomalaysia-score/index.html",
+    "/tangsoodomalaysia-score/styles.css",  // Change this if your CSS file has a different name
+    "/tangsoodomalaysia-score/script.js",  // Change this if your JS file has a different name
 ];
 
 // Install event: Cache files when the Service Worker is installed
