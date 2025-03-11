@@ -6,8 +6,6 @@ const urlsToCache = [
     "/tangsoodomalaysia-score/script.js",  // Change this if your JS file has a different name
 ];
 
-cache.addAll()
-
 // Install event: Cache files when the Service Worker is installed
 self.addEventListener("install", (event) => {
     event.waitUntil(
