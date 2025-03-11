@@ -112,7 +112,7 @@ body {
   gap: 10px;
 }
 
-/* Footer Bar: minimalist, same bg as body */
+/* Footer Bar: minimalist style */
 .footer-bar {
   width: 100%;
   background-color: #222;
@@ -127,16 +127,16 @@ body {
   background: none;
   border: none;
   font-size: 1.2rem;
-  color: white;
-  padding: 5px;
+  color: #222;
+  padding: 14px 24px;
   cursor: pointer;
   transition: color 0.2s ease;
 }
 .footer-bar button:hover {
-  color: #bbb;
+  color: #fff;
 }
 
-/* iOS-style button appearance for other buttons */
+/* iOS-style buttons for non-footer buttons */
 button {
   background: #fff;
   color: #333;
@@ -182,30 +182,39 @@ button:hover {
 .modal .modal-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-.modal label {
-  margin: 10px 0 5px;
-  font-size: 1rem;
-}
-.modal input {
-  width: 50px;
-  padding: 5px;
-  margin-bottom: 10px;
-  font-size: 1rem;
-}
-.modal .settings-group {
-  margin-bottom: 15px;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 10px;
+  align-items: stretch;
 }
 .settings-row {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.settings-row .input-group {
+  display: flex;
   align-items: center;
   gap: 5px;
+}
+.modal label {
+  font-size: 1rem;
+  text-align: left;
+  flex: 1;
+}
+.modal input {
+  width: 60px;
+  padding: 5px;
+  font-size: 1rem;
+}
+.two-col {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+.modal .settings-group {
+  margin-bottom: 15px;
+}
+.modal .settings-row:last-child {
+  margin-top: 15px;
 }
 
 /* Modal close button (X at top right) */
