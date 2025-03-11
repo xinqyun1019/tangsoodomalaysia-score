@@ -102,27 +102,25 @@ function updatePenalty(team, value) {
 }
 
 function swapSides() {
-  // Swap the team nodes by swapping their positions in the DOM.
+  // Swap the team nodes by reordering in the parent container
   let red = document.getElementById("red-container");
   let blue = document.getElementById("blue-container");
   let parent = red.parentElement;
-  // Insert blue before red if red comes first.
+  // Swap positions in DOM
   if (red.compareDocumentPosition(blue) & Node.DOCUMENT_POSITION_FOLLOWING) {
     parent.insertBefore(blue, red);
   } else {
     parent.insertBefore(red, blue);
   }
-  // Swap the color classes
+  // Swap color classes: use a temporary placeholder
   if (red.classList.contains("red")) {
-    red.classList.remove("red");
-    red.classList.add("blue");
-    blue.classList.remove("blue");
-    blue.classList.add("red");
+    red.classList.replace("red", "tempColor");
+    blue.classList.replace("blue", "red");
+    red.classList.replace("tempColor", "blue");
   } else {
-    red.classList.remove("blue");
-    red.classList.add("red");
-    blue.classList.remove("red");
-    blue.classList.add("blue");
+    red.classList.replace("blue", "tempColor");
+    blue.classList.replace("red", "blue");
+    red.classList.replace("tempColor", "red");
   }
 }
 
