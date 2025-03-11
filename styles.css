@@ -23,7 +23,6 @@ body {
 .scoreboard {
   width: 100%;
   max-width: 1200px;
-  /* Subtract footer height (assumed 70px) from full viewport height */
   min-height: calc(100vh - 70px);
   background: #333;
   padding: 20px;
@@ -82,6 +81,7 @@ body {
   border-radius: 10px;
   margin-bottom: 10px;
   text-align: center;
+  cursor: pointer;
 }
 .score-controls {
   display: flex;
@@ -112,14 +112,14 @@ body {
   gap: 10px;
 }
 
-/* Footer Bar: minimalist style */
+/* Footer Bar: minimalist, same bg as body */
 .footer-bar {
   width: 100%;
-  position: fixed;
-  bottom: 0;
-  background: #111;
+  background-color: #222;
   border-top: 1px solid #555;
   padding: 10px 0;
+  position: fixed;
+  bottom: 0;
   display: flex;
   justify-content: space-around;
 }
@@ -130,9 +130,13 @@ body {
   color: white;
   padding: 5px;
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+.footer-bar button:hover {
+  color: #bbb;
 }
 
-/* iOS-style button appearance for non-footer buttons */
+/* iOS-style button appearance for other buttons */
 button {
   background: #fff;
   color: #333;
@@ -185,7 +189,7 @@ button:hover {
   font-size: 1rem;
 }
 .modal input {
-  width: 60px;
+  width: 50px;
   padding: 5px;
   margin-bottom: 10px;
   font-size: 1rem;
@@ -193,10 +197,15 @@ button:hover {
 .modal .settings-group {
   margin-bottom: 15px;
   width: 100%;
-  text-align: center;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: wrap;
   gap: 10px;
+}
+.settings-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 /* Modal close button (X at top right) */
