@@ -36,7 +36,8 @@
             <button onclick="adjustTimer('seconds', -1)">-1s</button>
           </div>
         </div>
-        <div id="timer-display">02:00</div>
+        <!-- Clicking the timer display toggles play/pause -->
+        <div id="timer-display" onclick="toggleTimer()">02:00</div>
         <button onclick="toggleTimer()" id="play-pause-btn">Play</button>
         <button onclick="resetTimer()">Reset</button>
       </div>
