@@ -43,7 +43,7 @@ body {
   font-size: 2rem;
   margin-bottom: 10px;
 }
-/* Use ID for team backgrounds */
+/* Team backgrounds set via IDs */
 #red-container {
   grid-area: red;
   background: #b71c1c; /* Dark Red */
@@ -113,7 +113,7 @@ body {
   gap: 10px;
   margin-bottom: 10px;
 }
-/* Minimalist timer buttons (no background, no box-shadow) */
+/* Minimalist timer buttons: no box-shadow, no extra background */
 .minimal-btn {
   background: none;
   border: none;
@@ -168,7 +168,12 @@ body {
   background: #ddd;
 }
 
-/* For other buttons (global), minimal style already defined above for minimal-btn and footer buttons */
+/* For other buttons, use minimal styling (no box-shadow) */
+button.minimal-btn,
+.footer-bar button,
+.modal button {
+  box-shadow: none;
+}
 
 /* Modal Overlay */
 .modal-overlay {
