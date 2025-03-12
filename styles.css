@@ -379,7 +379,7 @@ button:focus {
 }
 
 /* Responsive Styles for Larger Screens */
-@media (min-width: 1024px) {
+@media (min-width: 2560px) {
   .team h2 {
     font-size: 3rem;
   }
