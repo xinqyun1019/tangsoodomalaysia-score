@@ -75,7 +75,7 @@
   <!-- Footer Bar: Minimalist toggles -->
   <div class="footer-bar">
     <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
-    <button class="modal-btn control-btn" onclick="resetMatchScore()">Reset Match</button>
+    <button class="modal-btn" onclick="resetAllScores()">Reset All</button>
     <button onclick="openSettings()">⚙️</button>
   </div>
 
@@ -112,9 +112,9 @@
         </div>
         <div class="settings-row two-col">
           <button class="modal-btn control-btn" onclick="resetPenaltyScore()">Reset Penalty</button>
+          <button class="modal-btn control-btn" onclick="resetMatchScore()">Reset Match</button>
         </div>
         <div class="settings-row two-col">
-          <button class="modal-btn control-btn" onclick="resetAllScores()">Reset All</button>
           <button class="modal-btn control-btn" onclick="swapSides()">Swap Court</button>
         </div>
         <div class="settings-row two-col">
