@@ -196,9 +196,9 @@ body {
   transform: scale(1.05);
 }
 
-/* Modal button for settings modal (smaller text) */
+/* Modal button for settings modal (font size now same as label) */
 .modal-btn {
-  font-size: 0.8rem;
+  font-size: 1rem;
   width: 100%;
 }
 
@@ -216,13 +216,13 @@ body {
   z-index: 2000;
 }
 
-/* Modal remains non–full screen with a slightly wider max-width */
+/* Modal remains non–full screen with responsive max-width using vw */
 .modal {
   background: #444;
   padding: 4vw;
   border-radius: 2vw;
   width: 90%;
-  max-width: 500px;
+  max-width: 30vw;  /* Updated to 30vw */
   position: relative;
 }
 
