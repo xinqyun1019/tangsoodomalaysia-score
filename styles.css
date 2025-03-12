@@ -265,11 +265,11 @@ body {
 
 @keyframes appleModalOpen {
   0% {
-    transform: scale(0.9) translate(-100%, -100%);
+    transform: scale(0.9) translate(500%, 100%);
     opacity: 0;
   }
   60% {
-    transform: scale(1.1) translateY(0);
+    transform: scale(1.05) translateY(0);
     opacity: 1;
   }
   100% {
@@ -288,14 +288,14 @@ body {
     opacity: 1;
   }
   100% {
-    transform: scale(0.9) translateY(20px);
+    transform: scale(0.9) translate(500%, 100%);
     opacity: 0;
   }
 }
 
 /* When the modal is opening, apply the "appleModalOpen" animation. */
 .modal.showing {
-  animation: appleModalOpen 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  animation: appleModalOpen 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
 /* When the modal is closing, apply the "appleModalClose" animation. */
