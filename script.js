@@ -117,18 +117,32 @@ function swapSides() {
 }
 
 function openSettings() {
-  let overlay = document.getElementById("settings-overlay");
-  overlay.classList.remove("hidden");       // show the overlay
+  const overlay = document.getElementById("settings-overlay");
+  overlay.classList.remove("hidden"); // show the overlay
 
-  let modal = document.getElementById("settings-modal");
-  // Remove any previous "closing" or other classes if needed
+  const modal = document.getElementById("settings-modal");
+  // remove any "closing" class if it was there
   modal.classList.remove("closing");
-  // Add the "showing" class so the animation triggers
+  // add "showing" class to trigger the open animation
   modal.classList.add("showing");
 }
 
 function closeSettings() {
   saveSettings();
+  
+  const overlay = document.getElementById("settings-overlay");
+  const modal = document.getElementById("settings-modal");
+
+  // remove "showing" so we don't keep the open animation
+  modal.classList.remove("showing");
+  // add "closing" to trigger the close animation
+  modal.classList.add("closing");
+
+  // Wait for the close animation to finish (0.4s), then hide the overlay
+  setTimeout(() => {
+    overlay.classList.add("hidden");
+    modal.classList.remove("closing");
+  }, 400); // match the animation duration
 }
 
 function saveSettings() {
