@@ -1,392 +1,169 @@
-/* Reset default styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tang Soo Do Malaysia Scoreboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- Scoreboard -->
+  <div class="scoreboard" id="scoreboard">
+    <!-- Red Team -->
+    <div class="team" id="red-container">
+      <h2>Red</h2>
+      <div class="penalty-section">
+        <span class="penalty-label">Penalty:</span>
+        <span class="penalty-score" id="red-penalty">0</span>
+        <div class="penalty-controls">
+          <button class="control-btn" onclick="updatePenalty('red', -1)">➖</button>
+          <button class="control-btn" onclick="updatePenalty('red', 1)">➕</button>
+        </div>
+      </div>
+      <!-- Clicking the score adds 1 point -->
+      <div class="match-score" id="red-score" onclick="updateScore('red', 1)">0</div>
+      <div class="score-controls">
+        <button class="control-btn" onclick="updateScore('red', -1)">➖</button>
+        <button class="control-btn" onclick="updateScore('red', 1)">➕</button>
+      </div>
+    </div>
+
+    <!-- Timer Section -->
+    <div class="middle-section" id="timer-section">
+      <!-- Clicking the timer toggles play/pause -->
+      <div id="timer-display" onclick="toggleTimer()">02:00</div>
+      <div class="timer-buttons">
+        <button id="play-pause-btn" class="minimal-btn" onclick="toggleTimer()">Play</button>
+        <button class="minimal-btn" onclick="resetTimer()">Reset Timer</button>
+      </div>
+      <!-- Timer Modification Controls -->
+      <button id="toggle-flexi-btn" class="minimal-btn" onclick="toggleFlexiButtons()">⏱</button>
+      <div id="flexi-buttons" class="flexi-buttons hidden">
+        <div class="timer-controls">
+          <button class="minimal-btn" onclick="adjustTimer('minutes', 1)">➕Min</button>
+          <button class="minimal-btn" onclick="adjustTimer('seconds', 1)">➕1s</button>
+        </div>
+        <div class="timer-controls">
+          <button class="minimal-btn" onclick="adjustTimer('minutes', -1)">➖Min</button>
+          <button class="minimal-btn" onclick="adjustTimer('seconds', -1)">➖1s</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blue Team -->
+    <div class="team" id="blue-container">
+      <h2>Blue</h2>
+      <div class="penalty-section">
+        <span class="penalty-label">Penalty:</span>
+        <span class="penalty-score" id="blue-penalty">0</span>
+        <div class="penalty-controls">
+          <button class="control-btn" onclick="updatePenalty('blue', -1)">➖</button>
+          <button class="control-btn" onclick="updatePenalty('blue', 1)">➕</button>
+        </div>
+      </div>
+      <!-- Clicking the score adds 1 point -->
+      <div class="match-score" id="blue-score" onclick="updateScore('blue', 1)">0</div>
+      <div class="score-controls">
+        <button class="control-btn" onclick="updateScore('blue', -1)">➖</button>
+        <button class="control-btn" onclick="updateScore('blue', 1)">➕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bar: Minimalist toggles -->
+  <div class="footer-bar">
+    <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
+    <button onclick="resetAllScores()">Reset Score</button>
+    <button onclick="openSettings()">⚙️</button>
+  </div>
+
+  <!-- Settings Modal with Overlay -->
+  <div id="settings-overlay" class="modal-overlay hidden">
+    <div id="settings-modal" class="modal">
+      <button class="modal-close" id="modal-close">✖</button>
+      <div class="modal-content">
+        <h2>Settings</h2>
+        <div class="settings-row">
+          <label for="match-minutes">Match Timer:</label>
+          <div class="input-group">
+            <input type="number" id="match-minutes" value="2" min="0">
+            <span>min</span>
+            <input type="number" id="match-seconds" value="0" min="0" max="59">
+            <span>sec</span>
+          </div>
+        </div>
+        <div class="settings-row">
+          <label for="interval-minutes">Interval Timer:</label>
+          <div class="input-group">
+            <input type="number" id="interval-minutes" value="1" min="0">
+            <span>min</span>
+            <input type="number" id="interval-seconds" value="0" min="0" max="59">
+            <span>sec</span>
+          </div>
+        </div>
+        <div class="settings-row">
+          <label for="rest-seconds">Rest Time:</label>
+          <div class="input-group">
+            <input type="number" id="rest-seconds" value="30" min="0">
+            <span>sec</span>
+          </div>
+        </div>
+        <div class="settings-row two-col">
+          <button class="modal-btn control-btn" onclick="resetPenaltyScore()">Reset Penalty Score</button>
+          <button class="modal-btn control-btn" onclick="resetMatchScore()">Reset Match Score</button>
+        </div>
+        <div class="settings-row two-col">
+          <button class="modal-btn control-btn" onclick="swapSides()">Swap Court</button>
+        </div>
+        <div class="settings-row two-col">
+          <button class="modal-btn control-btn" id="install-button" style="display: none;">Install App</button>
+        </div>
+        <div>
+          <p>&copy; <span id="year"></span> Shenjunathan | 🤡</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+  <script>//Service Workers
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/tangsoodomalaysia-score/sw.js')
+    .then(reg => console.log("Service Worker registered!", reg))
+    .catch(err => console.log("Service Worker registration failed:", err));
 }
 
-/* Body styling as a flex container for full screen layout */
-body {
-  background-color: #222;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  height: 100vh; /* Full viewport height */
-  width: 100%;
-  padding: 2%;
-}
+// Install Prompt
+let deferredPrompt;
 
-/* Scoreboard layout: fills available space above the footer */
-.scoreboard {
-  flex: 1; /* Expand to fill remaining space */
-  width: 100%;
-  background: #333;
-  padding: 2vh;
-  border-radius: 2vw;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  grid-template-areas: "red timer blue";
-  gap: 2vw;
-}
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
 
-/* Team styling with centered content */
-.team {
-  background: #444;
-  padding: 1.5vw;
-  border-radius: 2vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.team h2 {
-  font-size: 2rem;
-  margin-bottom: 1vh;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-}
+    // Show the install button when the event is fired
+    const installButton = document.getElementById('install-button');
+    if (installButton) {
+        installButton.style.display = 'block';
 
-/* Team backgrounds set via IDs */
-#red-container {
-  grid-area: red;
-  background: #b71c1c;
-}
-#blue-container {
-  grid-area: blue;
-  background: #0d47a1;
-}
+        installButton.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt(); // Show install prompt
 
-/* When scoreboard has "swapped" class, swap grid areas */
-.scoreboard.swapped {
-  grid-template-areas: "blue timer red";
-}
+                deferredPrompt.userChoice.then(choiceResult => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the PWA install');
+                    } else {
+                        console.log('User dismissed the PWA install');
+                    }
+                    deferredPrompt = null; // Reset after use
+                });
+            }
+        });
+    }
+});
 
-/* Penalty section */
-.penalty-section {
-  margin-bottom: 1vh;
-  font-size: 0.9rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.penalty-label {
-  font-weight: bold;
-}
-.penalty-score {
-  font-size: 1.2rem;
-  margin: 0.5vh 0;
-}
-.penalty-controls {
-  display: flex;
-  gap: 1vw;
-}
-
-/* Match score and controls */
-.match-score {
-  width: 100%; /* Wider match score */
-  font-size: 10vw;
-  font-weight: bold;
-  background: black;
-  padding: 2vw;  /* Increased padding for larger background */
-  border-radius: 2vw;
-  margin-bottom: 1vh;
-  text-align: center;
-  cursor: pointer;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-  transition: transform 0.2s ease;
-}
-.match-score:hover,
-.match-score:focus {
-  transform: scale(1.05);
-}
-.score-controls {
-  display: flex;
-  justify-content: center;
-  gap: 1vw;
-}
-
-/* Timer Section */
-.middle-section {
-  grid-area: timer;
-  background: #444;
-  padding: 1.5vw;
-  border-radius: 2vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#timer-display {
-  font-size: 10vw;
-  background: black;
-  padding: 1.5vw 3vw;
-  border-radius: 2vw;
-  margin-bottom: 1vh;
-  cursor: pointer;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-  transition: transform 0.2s ease;
-}
-#timer-display:hover,
-#timer-display:focus {
-  transform: scale(1.05);
-}
-.timer-buttons {
-  display: flex;
-  gap: 1vw;
-  margin-bottom: 1vh;
-}
-
-/* Minimalist timer buttons */
-.minimal-btn {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  color: white;
-  padding: 1vw 1.5vw;
-  cursor: pointer;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-.minimal-btn:hover,
-.minimal-btn:focus {
-  color: #fff;
-  transform: scale(1.05);
-}
-
-/* Footer Bar: Fixed at bottom, does not shrink */
-.footer-bar {
-  width: 100%;
-  background-color: #222;
-  border-top: 0.2vh solid #555;
-  padding: 1vh 1vw;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: space-around;
-}
-.footer-bar button {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  color: white;
-  padding: 0.5vw;
-  cursor: pointer;
-  transition: color 0.2s ease, padding 0.2s ease, transform 0.2s ease;
-}
-.footer-bar button:hover,
-.footer-bar button:focus {
-  color: #999;
-  transform: scale(1.05);
-}
-
-/* iOS-style control buttons for score/penalty */
-.control-btn {
-  background: #fff;
-  color: #333;
-  border: none;
-  padding: 1vw 2vw;
-  font-size: 1rem;
-  font-weight: 400;
-  border-radius: 1.5vw; /* Improved, subtler curve */
-  box-shadow: 0 0.2vw 0.4vw rgba(0,0,0,0.2);
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-.control-btn:hover,
-.control-btn:focus {
-  background: #ddd;
-  transform: scale(1.05);
-}
-
-/* Modal button for settings modal */
-.modal-btn {
-  font-size: 1rem;
-  width: 100%;
-}
-
-/* Modal Overlay */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
-
-/* Modal remains non–full screen (like last time) */
-.modal {
-  background: #444;
-  padding: 4vw;
-  border-radius: 2vw;
-  width: 90%;
-  max-width: 400px;
-  position: relative;
-}
-
-/* Center align modal content including "Xing Yun" */
-.modal .modal-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.settings-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1vh;
-}
-.settings-row .input-group {
-  display: flex;
-  align-items: center;
-  gap: 0.5vw;
-}
-.modal label {
-  font-size: 1rem;
-  text-align: left;
-  flex: 1;
-}
-.modal input {
-  width: 8vw;
-  padding: 0.5vw;
-  font-size: 1rem;
-  background-color: #555;
-  color: white;
-  border-radius: 1vw;
-}
-.two-col {
-  display: flex;
-  justify-content: space-around;
-  gap: 1vw;
-}
-.modal .settings-group {
-  margin-bottom: 1.5vh;
-}
-.modal .settings-row:last-child {
-  margin-top: 2.5vh;
-}
-
-/* Modal close button */
-.modal-close {
-  position: absolute;
-  top: 1.5vh;
-  right: 2vw;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  color: white;
-  cursor: pointer;
-  box-shadow: none;
-}
-
-/* Hidden class */
-.hidden {
-  display: none;
-}
-
-/* Modal animations */
-@keyframes appleModalOpen {
-  0% {
-    transform: scale(0.3) translate(calc(100vw - 100%), calc(100vh - 100%));
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.05) translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes appleModalClose {
-  0% {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
-  20% {
-    transform: scale(1.05) translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.3) translate(calc(100vw - 100%), calc(100vh - 100%));
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-/* Apply animations when modal opens/closes */
-.modal.showing {
-  animation: appleModalOpen 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-}
-.modal.closing {
-  animation: appleModalClose 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-}
-
-/* Global focus styles for accessibility */
-button:focus {
-  outline: 2px solid #fff;
-}
-
-/* Responsive Styles for Mobile */
-@media (max-width: 600px) {
-  .scoreboard {
-    width: 95%;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "timer timer"
-      "red blue";
-    gap: 1vw;
-    padding: 1vh;
-    min-height: auto;
-  }
-  .scoreboard.swapped {
-    grid-template-areas:
-      "timer timer"
-      "blue red";
-  }
-  .middle-section {
-    grid-area: timer;
-    width: 100%;
-    padding: 1vh 0.5vh;
-  }
-  #timer-display {
-    font-size: 8vw;
-    padding: 1.5vw 3vw;
-    margin-bottom: 0.8vh;
-  }
-  .timer-buttons {
-    margin-bottom: 0.8vh;
-  }
-  .match-score {
-    font-size: 8vw;
-    padding: 2.5vw;
-  }
-  .team h2 {
-    font-size: 1.8rem;
-  }
-  .control-btn, .modal-btn {
-    font-size: 0.9rem;
-  }
-}
-
-/* Responsive Styles for Larger Screens */
-@media (min-width: 1024px) {
-  .team h2 {
-    font-size: 3rem;
-  }
-  .penalty-section {
-    font-size: 1.2rem;
-  }
-  .minimal-btn, .control-btn {
-    font-size: 1.5rem;
-  }
-  .footer-bar button {
-    font-size: 1.5rem;
-  }
-}
+</script>
+  
+</html>
