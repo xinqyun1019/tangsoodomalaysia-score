@@ -82,7 +82,7 @@ body {
 
 /* Match score and controls */
 .match-score {
-  font-size: 6rem;
+  font-size: 10vw; /* Using viewport width for responsiveness */
   font-weight: bold;
   background: black;
   padding: 20px;
@@ -108,7 +108,7 @@ body {
   align-items: center;
 }
 #timer-display {
-  font-size: 5rem;
+  font-size: 10vw;
   background: black;
   padding: 15px 30px;
   border-radius: 10px;
@@ -155,7 +155,7 @@ body {
   transition: color 0.2s ease, padding 0.2s ease;
 }
 .footer-bar button:hover {
-  color: #000;
+  color: #999;
   padding: 7px 7px;
 }
 
@@ -176,14 +176,11 @@ body {
   background: #ddd;
 }
 
-/* Modal button specific for settings modal */
+/* Modal button for settings modal */
 .modal-btn {
   font-size: 1rem;
   width: 100%;
-  /* box-shadow for modal-btn is applied via control-btn if needed */
 }
-
-/* For other buttons, minimal styling already applied via minimal-btn and footer buttons */
 
 /* Modal Overlay */
 .modal-overlay {
@@ -265,7 +262,7 @@ body {
   display: none;
 }
 
-/* Responsive Styles for Mobile Safari and small screens */
+/* Responsive Styles for Mobile */
 @media (max-width: 600px) {
   .scoreboard {
     width: 95%;  /* Adjusted to 95% view for Mobile Safari */
@@ -288,21 +285,63 @@ body {
     padding: 10px 5px; /* Reduced padding for a tighter layout */
   }
   #timer-display {
-    font-size: 4.5rem; /* Reduced from 5rem by 10% */
-    padding: 13.5px 27px; /* Reduced from 15px 30px by 10% */
+    font-size: 4.5rem; /* Reduced 10% from 5rem */
+    padding: 13.5px 27px; /* Reduced 10% from 15px 30px */
     margin-bottom: 8px; /* Reduced margin */
   }
   .timer-buttons {
     margin-bottom: 8px;
   }
   .match-score {
-    font-size: 5.4rem; /* Reduced from 6rem by 10% */
-    padding: 18px;     /* Reduced from 20px by 10% */
+    font-size: 5.4rem; /* Reduced 10% from 6rem */
+    padding: 18px;     /* Reduced 10% from 20px */
   }
   .team h2 {
-    font-size: 1.8rem; /* Reduced from 2rem by 10% */
+    font-size: 1.8rem; /* Reduced 10% from 2rem */
   }
   .control-btn, .modal-btn {
-    font-size: 0.9rem; /* Reduced from default sizes by ~10% */
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsive Styles for 4K and large displays */
+@media (min-width: 1920px) {
+  .scoreboard {
+    max-width: none; /* Allow full width */
+    width: 100%;
+    padding: 40px;
+    gap: 40px;
+  }
+  .team h2 {
+    font-size: 3rem;
+  }
+  .match-score {
+    font-size: 10rem;
+    padding: 40px;
+  }
+  #timer-display {
+    font-size: 10rem;
+    padding: 40px 60px;
+  }
+  .penalty-score {
+    font-size: 2rem;
+  }
+  .control-btn {
+    padding: 24px 36px;
+    font-size: 2rem;
+  }
+  .minimal-btn {
+    font-size: 1.6rem;
+    padding: 12px 18px;
+  }
+  .footer-bar {
+    font-size: 1.6rem;
+  }
+  .modal {
+    padding: 40px;
+    max-width: 600px;
+  }
+  .modal label, .modal input {
+    font-size: 1.2rem;
   }
 }
