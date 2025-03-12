@@ -28,6 +28,7 @@ body {
   grid-template-columns: 1fr auto 1fr;
   grid-template-areas: "red timer blue";
   gap: 2vw;
+  margin: 0 auto;
 }
 
 /* Team styling with centered content */
@@ -185,7 +186,7 @@ body {
   padding: 1vw 2vw;
   font-size: 1rem;
   font-weight: 400;
-  border-radius: 1.5vw; /* Improved, subtler curve */
+  border-radius: 1.5vw;
   box-shadow: 0 0.2vw 0.4vw rgba(0,0,0,0.2);
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
@@ -357,45 +358,45 @@ button:focus {
   outline: 2px solid #fff;
 }
 
-/* Responsive Styles for Mobile */
+/* Customized Mobile Styles */
 @media (max-width: 600px) {
+  body {
+    padding: 1%;
+  }
+  /* Center and enlarge the scoreboard for mobile */
   .scoreboard {
     width: 95%;
-    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+    /* Stack content in a single column for clarity */
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "timer timer"
-      "red blue";
-    gap: 1vw;
+      "timer"
+      "red"
+      "blue";
+    gap: 2vh;
     padding: 1vh;
-    min-height: auto;
-  }
-  .scoreboard.swapped {
-    grid-template-areas:
-      "timer timer"
-      "blue red";
   }
   .middle-section {
-    grid-area: timer;
     width: 100%;
-    padding: 1vh 0.5vh;
+    padding: 2vw 1vw;
   }
   #timer-display {
-    font-size: 8vw;
-    padding: 1.5vw 3vw;
-    margin-bottom: 0.8vh;
-  }
-  .timer-buttons {
-    margin-bottom: 0.8vh;
+    font-size: 12vw;
+    padding: 2vw 4vw;
+    margin-bottom: 1vh;
   }
   .match-score {
-    font-size: 8vw;
-    padding: 2.5vw;
+    font-size: 12vw;
+    padding: 3vw;
   }
   .team h2 {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
+  }
+  .timer-buttons {
+    margin-bottom: 1vh;
   }
   .control-btn, .modal-btn {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }
 
