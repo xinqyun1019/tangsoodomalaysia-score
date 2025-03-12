@@ -126,7 +126,6 @@ function openSettings() {
 }
 
 function closeSettings() {
-  saveSettings();
 
   const overlay = document.getElementById("settings-overlay");
   const modal = document.getElementById("settings-modal");
@@ -140,6 +139,7 @@ function closeSettings() {
   setTimeout(() => {
     overlay.classList.add("hidden");
     modal.classList.remove("closing");
+    saveSettings();
   }, 400); // 400ms = animation duration
 }
 
