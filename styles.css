@@ -367,12 +367,10 @@ button:focus {
   .scoreboard {
     width: 95%;
     margin: 0 auto;
-    /* Stack content in a single column for clarity */
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
-      "timer"
-      "red"
-      "blue";
+      "timer timer"
+      "red blue";
     gap: 2vh;
     padding: 1vh;
   }
