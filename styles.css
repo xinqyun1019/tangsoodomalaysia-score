@@ -84,6 +84,7 @@ body {
 
 /* Match score and controls */
 .match-score {
+  width: 100%; /* Make the match score wider */
   font-size: 10vw;
   font-weight: bold;
   background: black;
