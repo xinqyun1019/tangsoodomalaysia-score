@@ -86,7 +86,7 @@ body {
 /* Match score and controls */
 .match-score {
   width: 100%; /* Wider match score */
-  font-size: 10vw;
+  font-size: 15vw;
   font-weight: bold;
   background: black;
   padding: 2vw;  /* Increased padding for larger background */
@@ -385,7 +385,7 @@ button:focus {
     margin-bottom: 1vh;
   }
   .match-score {
-    font-size: 12vw;
+    font-size: 40vw;
     padding: 3vw;
   }
   .team h2 {
