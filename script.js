@@ -118,31 +118,27 @@ function swapSides() {
 
 function openSettings() {
   const overlay = document.getElementById("settings-overlay");
-  overlay.classList.remove("hidden"); // show the overlay
+  overlay.classList.remove("hidden"); // Show the overlay
 
   const modal = document.getElementById("settings-modal");
-  // remove any "closing" class if it was there
-  modal.classList.remove("closing");
-  // add "showing" class to trigger the open animation
-  modal.classList.add("showing");
+  modal.classList.remove("closing"); // Ensure closing class is removed
+  modal.classList.add("showing"); // Trigger open animation
 }
 
 function closeSettings() {
   saveSettings();
-  
+
   const overlay = document.getElementById("settings-overlay");
   const modal = document.getElementById("settings-modal");
 
-  // remove "showing" so we don't keep the open animation
-  modal.classList.remove("showing");
-  // add "closing" to trigger the close animation
-  modal.classList.add("closing");
+  modal.classList.remove("showing"); // Remove opening animation class
+  modal.classList.add("closing"); // Add closing animation class
 
-  // Wait for the close animation to finish (0.4s), then hide the overlay
+  // Hide the overlay & remove the closing class AFTER animation finishes
   setTimeout(() => {
     overlay.classList.add("hidden");
-    modal.classList.remove("closing");
-  }, 400); // match the animation duration
+    modal.classList.remove("closing"); // Remove closing class AFTER animation completes
+  }, 400); // Ensure this matches your CSS animation duration
 }
 
 function saveSettings() {
