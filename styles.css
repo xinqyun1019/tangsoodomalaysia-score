@@ -84,7 +84,7 @@ body {
 
 /* Match score and controls */
 .match-score {
-  width: 100%; /* Make the match score wider */
+  width: 100%; /* Wider match score */
   font-size: 10vw;
   font-weight: bold;
   background: black;
@@ -215,19 +215,25 @@ body {
   align-items: center;
   z-index: 2000;
 }
+
+/* Modal remains non–full screen (like last time) */
 .modal {
   background: #444;
   padding: 4vw;
   border-radius: 2vw;
   width: 90%;
-  max-width: 90vw;
+  max-width: 400px;
   position: relative;
 }
+
+/* Center align modal content including "Xing Yun" */
 .modal .modal-content {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
+  text-align: center;
 }
+
 .settings-row {
   display: flex;
   justify-content: space-between;
