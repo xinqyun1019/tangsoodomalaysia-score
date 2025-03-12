@@ -216,14 +216,30 @@ body {
   z-index: 2000;
 }
 
-/* Modal remains non–full screen with responsive max-width using vw */
+/* Modal remains non–full screen */
 .modal {
   background: #444;
   padding: 4vw;
   border-radius: 2vw;
   width: 90%;
-  max-width: 30vw;  /* Updated to 30vw */
   position: relative;
+}
+
+/* Fixed modal max-width for each screen size */
+@media (max-width: 600px) {
+  .modal {
+    max-width: 300px;
+  }
+}
+@media (min-width: 601px) and (max-width: 1023px) {
+  .modal {
+    max-width: 400px;
+  }
+}
+@media (min-width: 1024px) {
+  .modal {
+    max-width: 500px;
+  }
 }
 
 /* Center align modal content including "Xing Yun" */
@@ -379,7 +395,7 @@ button:focus {
 }
 
 /* Responsive Styles for Larger Screens */
-@media (min-width: 2560px) {
+@media (min-width: 1024px) {
   .team h2 {
     font-size: 3rem;
   }
