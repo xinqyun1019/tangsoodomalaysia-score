@@ -6,30 +6,27 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Body styling */
+/* Body styling as a flex container for full screen layout */
 body {
   background-color: #222;
   color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
+  height: 100vh; /* Full viewport height */
   width: 100%;
   padding: 2%;
 }
 
-/* Scoreboard layout: fill full width, full height up to footer */
+/* Scoreboard layout: fills available space above the footer */
 .scoreboard {
+  flex: 1; /* Expand to fill remaining space */
   width: 100%;
-  min-height: calc(84vh);
   background: #333;
   padding: 2vh;
   border-radius: 2vw;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  grid-template-areas:
-    "red timer blue";
+  grid-template-areas: "red timer blue";
   gap: 2vw;
 }
 
@@ -44,6 +41,7 @@ body {
   margin-bottom: 1vh;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
 }
+
 /* Team backgrounds set via IDs */
 #red-container {
   grid-area: red;
@@ -56,8 +54,7 @@ body {
 
 /* When scoreboard has "swapped" class, swap grid areas */
 .scoreboard.swapped {
-  grid-template-areas:
-    "blue timer red";
+  grid-template-areas: "blue timer red";
 }
 
 /* Penalty section */
@@ -85,7 +82,7 @@ body {
   font-size: 10vw;
   font-weight: bold;
   background: black;
-  padding: 2vw; /* Increased padding for a larger background */
+  padding: 2vw;  /* Increased padding for larger background */
   border-radius: 2vw;
   margin-bottom: 1vh;
   text-align: center;
@@ -132,6 +129,7 @@ body {
   gap: 1vw;
   margin-bottom: 1vh;
 }
+
 /* Minimalist timer buttons */
 .minimal-btn {
   background: none;
@@ -148,14 +146,13 @@ body {
   transform: scale(1.05);
 }
 
-/* Footer Bar: Minimalist style */
+/* Footer Bar: Fixed at bottom, does not shrink */
 .footer-bar {
   width: 100%;
   background-color: #222;
   border-top: 0.2vh solid #555;
   padding: 1vh 1vw;
-  position: fixed;
-  bottom: 0;
+  flex-shrink: 0;
   display: flex;
   justify-content: space-around;
 }
@@ -174,7 +171,7 @@ body {
   transform: scale(1.05);
 }
 
-/* iOS-style control buttons for score/penalty (with box-shadow) */
+/* iOS-style control buttons for score/penalty */
 .control-btn {
   background: #fff;
   color: #333;
@@ -182,7 +179,7 @@ body {
   padding: 1vw 2vw;
   font-size: 1rem;
   font-weight: 400;
-  border-radius: 1.5vw; /* Subtler curve instead of a full circle */
+  border-radius: 1.5vw; /* Improved, subtler curve */
   box-shadow: 0 0.2vw 0.4vw rgba(0,0,0,0.2);
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
@@ -261,7 +258,7 @@ body {
   margin-top: 2.5vh;
 }
 
-/* Modal close button: minimal style, no box-shadow */
+/* Modal close button */
 .modal-close {
   position: absolute;
   top: 1.5vh;
@@ -279,6 +276,7 @@ body {
   display: none;
 }
 
+/* Modal animations */
 @keyframes appleModalOpen {
   0% {
     transform: scale(0.3) translate(calc(100vw - 100%), calc(100vh - 100%));
@@ -310,12 +308,10 @@ body {
   }
 }
 
-/* When the modal is opening, apply the "appleModalOpen" animation. */
+/* Apply animations when modal opens/closes */
 .modal.showing {
   animation: appleModalOpen 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
-
-/* When the modal is closing, apply the "appleModalClose" animation. */
 .modal.closing {
   animation: appleModalClose 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
