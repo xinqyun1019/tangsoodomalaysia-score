@@ -290,6 +290,7 @@ body {
   100% {
     transform: scale(0.9) translate(500%, 100%);
     opacity: 0;
+    visibility: hidden;
   }
 }
 
