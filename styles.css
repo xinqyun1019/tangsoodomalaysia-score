@@ -263,6 +263,27 @@ body {
   display: none;
 }
 
+@keyframes appleModalOpen {
+  0% {
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* The modal in "showing" state uses the keyframe animation. */
+.modal.showing {
+  animation: appleModalOpen 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+
 /* Responsive Styles for Mobile */
 @media (max-width: 600px) {
   .scoreboard {
