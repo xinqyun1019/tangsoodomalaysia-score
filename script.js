@@ -176,3 +176,5 @@ document.getElementById("modal-close").addEventListener("click", function() {
 // Initialize timer on load
 updateCurrentTime();
 updateTimerDisplay();
+
+document.getElementById("year").textContent = new Date().getFullYear();
