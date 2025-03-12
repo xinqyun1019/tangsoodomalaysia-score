@@ -118,7 +118,13 @@ function swapSides() {
 
 function openSettings() {
   let overlay = document.getElementById("settings-overlay");
-  overlay.classList.remove("hidden");
+  overlay.classList.remove("hidden");       // show the overlay
+
+  let modal = document.getElementById("settings-modal");
+  // Remove any previous "closing" or other classes if needed
+  modal.classList.remove("closing");
+  // Add the "showing" class so the animation triggers
+  modal.classList.add("showing");
 }
 
 function closeSettings() {
