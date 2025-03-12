@@ -29,7 +29,8 @@ body {
   border-radius: 10px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  grid-template-areas: "red timer blue";
+  grid-template-areas: 
+    "red timer blue";
   gap: 20px;
 }
 
@@ -40,8 +41,7 @@ body {
   border-radius: 10px;
 }
 .team h2 {
-  /* Responsive team header font-size */
-  font-size: clamp(1.5rem, 3vw, 3rem);
+  font-size: 2rem;
   margin-bottom: 10px;
 }
 /* Team backgrounds set via IDs */
@@ -56,13 +56,14 @@ body {
 
 /* When scoreboard has "swapped" class, swap grid areas */
 .scoreboard.swapped {
-  grid-template-areas: "blue timer red";
+  grid-template-areas: 
+    "blue timer red";
 }
 
 /* Penalty section */
 .penalty-section {
   margin-bottom: 10px;
-  font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+  font-size: 0.9rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,7 +72,7 @@ body {
   font-weight: bold;
 }
 .penalty-score {
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: 1.2rem;
   margin: 5px 0;
 }
 .penalty-controls {
@@ -81,8 +82,7 @@ body {
 
 /* Match score and controls */
 .match-score {
-  /* Responsive using clamp() so it scales on large screens (up to 4K) */
-  font-size: clamp(4rem, 6vw, 10rem);
+  font-size: 6rem;
   font-weight: bold;
   background: black;
   padding: 20px;
@@ -108,7 +108,7 @@ body {
   align-items: center;
 }
 #timer-display {
-  font-size: clamp(3rem, 5vw, 8rem);
+  font-size: 5rem;
   background: black;
   padding: 15px 30px;
   border-radius: 10px;
@@ -124,7 +124,7 @@ body {
 .minimal-btn {
   background: none;
   border: none;
-  font-size: clamp(1rem, 1.2vw, 2rem);
+  font-size: 1.2rem;
   color: white;
   padding: 8px 12px;
   cursor: pointer;
@@ -148,14 +148,14 @@ body {
 .footer-bar button {
   background: none;
   border: none;
-  font-size: clamp(1rem, 1.5vw, 2rem);
+  font-size: 1.2rem;
   color: white;
   padding: 5px;
   cursor: pointer;
   transition: color 0.2s ease, padding 0.2s ease;
 }
 .footer-bar button:hover {
-  color: #999;
+  color: #000;
   padding: 7px 7px;
 }
 
@@ -165,7 +165,7 @@ body {
   color: #333;
   border: none;
   padding: 11px 21px;
-  font-size: clamp(1rem, 2vw, 2.5rem);
+  font-size: 17px;
   font-weight: 400;
   border-radius: 980px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -175,6 +175,15 @@ body {
 .control-btn:hover {
   background: #ddd;
 }
+
+/* Modal button specific for settings modal */
+.modal-btn {
+  font-size: 1rem;
+  width: 100%;
+  /* box-shadow for modal-btn is applied via control-btn if needed */
+}
+
+/* For other buttons, minimal styling already applied via minimal-btn and footer buttons */
 
 /* Modal Overlay */
 .modal-overlay {
@@ -214,14 +223,14 @@ body {
   gap: 5px;
 }
 .modal label {
-  font-size: clamp(1rem, 1.5vw, 2rem);
+  font-size: 1rem;
   text-align: left;
   flex: 1;
 }
 .modal input {
   width: 50px;
   padding: 5px;
-  font-size: clamp(1rem, 1.2vw, 1.5rem);
+  font-size: 1rem;
   background-color: #555;
   color: white;
   border-radius: 6px;
@@ -245,7 +254,7 @@ body {
   right: 20px;
   background: transparent;
   border: none;
-  font-size: clamp(1.5rem, 2vw, 2.5rem);
+  font-size: 1.5rem;
   color: white;
   cursor: pointer;
   box-shadow: none;
@@ -256,10 +265,10 @@ body {
   display: none;
 }
 
-/* Responsive Styles for Mobile Safari (max-width: 600px) */
+/* Responsive Styles for Mobile Safari and small screens */
 @media (max-width: 600px) {
   .scoreboard {
-    width: 85%;
+    width: 95%;  /* Adjusted to 95% view for Mobile Safari */
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "timer timer"
@@ -276,36 +285,24 @@ body {
   .middle-section {
     grid-area: timer;
     width: 100%;
-    padding: 10px 5px;
+    padding: 10px 5px; /* Reduced padding for a tighter layout */
   }
   #timer-display {
-    font-size: 4rem;
-    padding: 13.5px 27px;
-    margin-bottom: 8px;
+    font-size: 4.5rem; /* Reduced from 5rem by 10% */
+    padding: 13.5px 27px; /* Reduced from 15px 30px by 10% */
+    margin-bottom: 8px; /* Reduced margin */
   }
   .timer-buttons {
     margin-bottom: 8px;
   }
   .match-score {
-    font-size: 5rem;
-    padding: 18px;
+    font-size: 5.4rem; /* Reduced from 6rem by 10% */
+    padding: 18px;     /* Reduced from 20px by 10% */
   }
   .team h2 {
-    font-size: 1.8rem;
+    font-size: 1.8rem; /* Reduced from 2rem by 10% */
   }
-  .control-btn {
-    font-size: 1.2rem;
-    padding: 16px 24px;
-  }
-  .modal-close {
-    font-size: 1.3rem;
-  }
-  .modal input {
-    width: 45px;
-    padding: 4px;
-    font-size: 0.9rem;
-  }
-  .modal label {
-    font-size: 0.9rem;
+  .control-btn, .modal-btn {
+    font-size: 0.9rem; /* Reduced from default sizes by ~10% */
   }
 }
