@@ -30,11 +30,16 @@ body {
   gap: 2vw;
 }
 
-/* Team styling */
+/* Team styling with centered content */
 .team {
   background: #444;
   padding: 1.5vw;
   border-radius: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .team h2 {
   font-size: 2rem;
