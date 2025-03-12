@@ -85,6 +85,7 @@ body {
   font-size: 10vw;
   font-weight: bold;
   background: black;
+  padding: 2vw; /* Increased padding for a larger background */
   border-radius: 2vw;
   margin-bottom: 1vh;
   text-align: center;
@@ -181,7 +182,7 @@ body {
   padding: 1vw 2vw;
   font-size: 1rem;
   font-weight: 400;
-  border-radius: 50%;
+  border-radius: 1.5vw; /* Subtler curve instead of a full circle */
   box-shadow: 0 0.2vw 0.4vw rgba(0,0,0,0.2);
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
@@ -356,12 +357,28 @@ button:focus {
   }
   .match-score {
     font-size: 8vw;
-    padding: 1.8vw;
+    padding: 2.5vw;
   }
   .team h2 {
     font-size: 1.8rem;
   }
   .control-btn, .modal-btn {
     font-size: 0.9rem;
+  }
+}
+
+/* Responsive Styles for Larger Screens */
+@media (min-width: 1024px) {
+  .team h2 {
+    font-size: 3rem;
+  }
+  .penalty-section {
+    font-size: 1.2rem;
+  }
+  .minimal-btn, .control-btn {
+    font-size: 1.5rem;
+  }
+  .footer-bar button {
+    font-size: 1.5rem;
   }
 }
