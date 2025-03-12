@@ -236,9 +236,14 @@ body {
     max-width: 400px;
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 1024px) and (max-width: 1919px) {
   .modal {
     max-width: 500px;
+  }
+}
+@media (min-width: 1920px) {
+  .modal {
+    max-width: 30vw;
   }
 }
 
