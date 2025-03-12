@@ -131,14 +131,16 @@ function closeSettings() {
   const overlay = document.getElementById("settings-overlay");
   const modal = document.getElementById("settings-modal");
 
-  modal.classList.remove("showing"); // Remove opening animation class
-  modal.classList.add("closing"); // Add closing animation class
+  // Remove "showing" to prevent conflicts
+  modal.classList.remove("showing");
+  // Add "closing" to trigger the close animation
+  modal.classList.add("closing");
 
-  // Hide the overlay & remove the closing class AFTER animation finishes
+  // Ensure overlay is hidden *after* animation completes (match the animation duration)
   setTimeout(() => {
     overlay.classList.add("hidden");
-    modal.classList.remove("closing"); // Remove closing class AFTER animation completes
-  }, 400); // Ensure this matches your CSS animation duration
+    modal.classList.remove("closing");
+  }, 400); // 400ms = animation duration
 }
 
 function saveSettings() {
