@@ -8,6 +8,7 @@ let isRunning = false;
 let timerInterval;
 let currentTime = 0;
 let alarmSound = new Audio("Arlam.mp3");
+let currentPreset = "black"; // Default: Black Belt Timer
 
 window.addEventListener("load", () => {
   alarmSound.load();
@@ -115,6 +116,42 @@ function swapSides() {
   // Toggle the "swapped" class on the scoreboard for responsive swapping.
   let scoreboard = document.getElementById("scoreboard");
   scoreboard.classList.toggle("swapped");
+}
+
+function togglePreset() {
+  if (currentPreset === "black") {
+    // Color Belt Timer: 1:30 match / 0:45 interval
+    matchTime.minutes = 1;
+    matchTime.seconds = 30;
+    roundTime.minutes = 0;
+    roundTime.seconds = 45;
+
+    document.getElementById("match-minutes").value = 1;
+    document.getElementById("match-seconds").value = 30;
+    document.getElementById("interval-minutes").value = 0;
+    document.getElementById("interval-seconds").value = 45;
+
+    currentPreset = "color";
+    document.getElementById("preset-toggle-btn").textContent = "Color Belt Timer";
+
+  } else {
+    // Black Belt Timer: 2:00 match / 1:00 interval
+    matchTime.minutes = 2;
+    matchTime.seconds = 0;
+    roundTime.minutes = 1;
+    roundTime.seconds = 0;
+
+    document.getElementById("match-minutes").value = 2;
+    document.getElementById("match-seconds").value = 0;
+    document.getElementById("interval-minutes").value = 1;
+    document.getElementById("interval-seconds").value = 0;
+
+    currentPreset = "black";
+    document.getElementById("preset-toggle-btn").textContent = "Black Belt Timer";
+  }
+
+  updateCurrentTime();
+  updateTimerDisplay();
 }
 
 function openSettings() {
