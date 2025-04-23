@@ -77,11 +77,6 @@
     transition: transform 0.2s ease;
   }
 
-  .match-score:hover,
-  .match-score:focus {
-    transform: scale(1.05);
-  }
-
   .score-controls {
     display: flex;
     justify-content: center;
@@ -110,11 +105,6 @@
     transition: transform 0.2s ease;
   }
 
-  #timer-display:hover,
-  #timer-display:focus {
-    transform: scale(1.05);
-  }
-
   .timer-buttons {
     display: flex;
     gap: 1vw;
@@ -135,7 +125,6 @@
   .minimal-btn:hover,
   .minimal-btn:focus {
     color: #fff;
-    transform: scale(1.05);
   }
 
   /* Footer Bar: Fixed at bottom, does not shrink */
@@ -161,7 +150,6 @@
   .footer-bar button:hover,
   .footer-bar button:focus {
     color: #999;
-    transform: scale(1.05);
   }
 
   /* iOS-style control buttons for score/penalty */
@@ -181,7 +169,6 @@
   .control-btn:hover,
   .control-btn:focus {
     background: #ddd;
-    transform: scale(1.05);
   }
 
   /* Modal button for settings modal (font size now same as label) */
