@@ -142,11 +142,13 @@ function togglePreset() {
     matchTime.seconds = 30;
     roundTime.minutes = 0;
     roundTime.seconds = 45;
+    restTime.seconds = 30;
 
     document.getElementById("match-minutes").value = 1;
     document.getElementById("match-seconds").value = 30;
     document.getElementById("interval-minutes").value = 0;
     document.getElementById("interval-seconds").value = 45;
+    document.getElementById("rest-seconds").value = 30;
 
     currentPreset = "colour";
     document.getElementById("preset-toggle-btn").textContent = "Colour Belt";
@@ -157,11 +159,13 @@ function togglePreset() {
     matchTime.seconds = 0;
     roundTime.minutes = 1;
     roundTime.seconds = 0;
+    restTime.seconds = 30;
 
     document.getElementById("match-minutes").value = 2;
     document.getElementById("match-seconds").value = 0;
     document.getElementById("interval-minutes").value = 1;
     document.getElementById("interval-seconds").value = 0;
+    document.getElementById("rest-seconds").value = 30;
 
     currentPreset = "black";
     document.getElementById("preset-toggle-btn").textContent = "Black Belt";
