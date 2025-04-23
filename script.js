@@ -120,7 +120,7 @@ function swapSides() {
 
 function togglePreset() {
   if (currentPreset === "black") {
-    // Color Belt Timer: 1:30 match / 0:45 interval
+    // Colour Belt Timer: 1:30 match / 0:45 interval
     matchTime.minutes = 1;
     matchTime.seconds = 30;
     roundTime.minutes = 0;
@@ -131,8 +131,8 @@ function togglePreset() {
     document.getElementById("interval-minutes").value = 0;
     document.getElementById("interval-seconds").value = 45;
 
-    currentPreset = "color";
-    document.getElementById("preset-toggle-btn").textContent = "Color Belt Timer";
+    currentPreset = "colour";
+    document.getElementById("preset-toggle-btn").textContent = "Colour Belt Timer";
 
   } else {
     // Black Belt Timer: 2:00 match / 1:00 interval
