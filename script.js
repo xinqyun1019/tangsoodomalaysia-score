@@ -43,19 +43,21 @@ function startTimer() {
   isRunning = true;
   document.getElementById("play-pause-btn").textContent = "Pause";
   timerInterval = setInterval(() => {
-    if (currentTime <= 1) {
-      clearInterval(timerInterval);
-      isRunning = false;
-      document.getElementById("play-pause-btn").textContent = "Play";
-
-      alarmSound.play().catch(error => {
-        console.error("Sound playback failed:", error);
-      });
-      return;
-    }
-    currentTime--;
-    updateTimerDisplay();
-  }, 1000);
+  if (currentTime <= 1.8) {
+    alarmSound.play().catch(error => {
+      console.error("Sound playback failed:", error);
+    });
+  }
+  
+  if (currentTime <= 0) {
+    clearInterval(timerInterval);
+    isRunning = false;
+    document.getElementById("play-pause-btn").textContent = "Play";
+    return;
+  }
+  currentTime--;
+  updateTimerDisplay();
+}, 1000);
 }
 
 function pauseTimer() {
