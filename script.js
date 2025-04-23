@@ -47,6 +47,26 @@ function startTimer() {
     currentTime--;
     updateTimerDisplay();
   }, 1000);
+
+    // Preload the alarm sound globally
+  let alarmSound = new Audio("Arlam.mp3"); 
+
+  window.addEventListener("load", () => {
+    alarmSound.load(); // Preload on page load
+  });
+
+  if (currentTime <= 0) {
+    clearInterval(timerInterval);
+    isRunning = false;
+    document.getElementById("play-pause-btn").textContent = "Play";
+
+    // Play preloaded alarm sound
+    alarmSound.play().catch(error => {
+      console.error("Sound playback failed:", error);
+    });
+
+    return;
+  }
 }
 
 function pauseTimer() {
@@ -98,18 +118,6 @@ function updateScore(team, value) {
   scoreEl.textContent = Math.max(0, currentScore + value);
 }
 
-function updatePenalty(team, value) {
-  let penaltyEl = document.getElementById(team + "-penalty");
-  let opponent = team === "red" ? "blue" : "red";
-  let opponentScoreEl = document.getElementById(opponent + "-score");
-  let currentPenalty = parseInt(penaltyEl.textContent);
-  let currentOpponentScore = parseInt(opponentScoreEl.textContent);
-  let newPenalty = Math.max(0, currentPenalty + value);
-  let diff = newPenalty - currentPenalty;
-  penaltyEl.textContent = newPenalty;
-  opponentScoreEl.textContent = Math.max(0, currentOpponentScore + diff);
-}
-
 function swapSides() {
   // Toggle the "swapped" class on the scoreboard for responsive swapping.
   let scoreboard = document.getElementById("scoreboard");
@@ -123,6 +131,7 @@ function openSettings() {
   const modal = document.getElementById("settings-modal");
   modal.classList.remove("closing"); // Ensure closing class is removed
   modal.classList.add("showing"); // Trigger open animation
+  pauseTimer();
 }
 
 function closeSettings() {
@@ -159,24 +168,8 @@ function resetMatchScore() {
   document.getElementById("blue-score").textContent = "0";
 }
 
-function resetPenaltyScore() {
-  let redPenaltyEl = document.getElementById("red-penalty");
-  let bluePenaltyEl = document.getElementById("blue-penalty");
-  let redPenalty = parseInt(redPenaltyEl.textContent);
-  let bluePenalty = parseInt(bluePenaltyEl.textContent);
-  let blueScoreEl = document.getElementById("blue-score");
-  let blueScore = parseInt(blueScoreEl.textContent);
-  blueScoreEl.textContent = Math.max(0, blueScore - redPenalty);
-  let redScoreEl = document.getElementById("red-score");
-  let redScore = parseInt(redScoreEl.textContent);
-  redScoreEl.textContent = Math.max(0, redScore - bluePenalty);
-  redPenaltyEl.textContent = "0";
-  bluePenaltyEl.textContent = "0";
-}
-
 function resetAllScores() {
   resetMatchScore();
-  resetPenaltyScore();
 }
 
 // Close modal when clicking outside modal content
