@@ -43,7 +43,7 @@ function startTimer() {
   isRunning = true;
   document.getElementById("play-pause-btn").textContent = "Pause";
   timerInterval = setInterval(() => {
-    if (currentTime <= 0) {
+    if (currentTime <= 1) {
       clearInterval(timerInterval);
       isRunning = false;
       document.getElementById("play-pause-btn").textContent = "Play";
@@ -56,26 +56,6 @@ function startTimer() {
     currentTime--;
     updateTimerDisplay();
   }, 1000);
-
-    // Preload the alarm sound globally
-  let alarmSound = new Audio("Arlam.mp3"); 
-
-  window.addEventListener("load", () => {
-    alarmSound.load(); // Preload on page load
-  });
-
-  if (currentTime <= 0) {
-    clearInterval(timerInterval);
-    isRunning = false;
-    document.getElementById("play-pause-btn").textContent = "Play";
-
-    // Play preloaded alarm sound
-    alarmSound.play().catch(error => {
-      console.error("Sound playback failed:", error);
-    });
-
-    return;
-  }
 }
 
 function pauseTimer() {
