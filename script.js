@@ -8,6 +8,13 @@ let isRunning = false;
 let timerInterval;
 let currentTime = 0;
 
+// Preload the alarm sound globally
+let alarmSound = new Audio("Arlam.mp3"); 
+
+window.addEventListener("load", () => {
+alarmSound.load(); // Preload on page load
+});
+
 // Set currentTime based on current mode
 function updateCurrentTime() {
   currentTime = isIntervalTimer
@@ -44,18 +51,8 @@ function startTimer() {
       document.getElementById("play-pause-btn").textContent = "Play";
       return;
     }
-    currentTime--;
-    updateTimerDisplay();
-  }, 1000);
 
-    // Preload the alarm sound globally
-  let alarmSound = new Audio("Arlam.mp3"); 
-
-  window.addEventListener("load", () => {
-    alarmSound.load(); // Preload on page load
-  });
-
-  if (currentTime <= 0) {
+      if (currentTime <= 0) {
     clearInterval(timerInterval);
     isRunning = false;
     document.getElementById("play-pause-btn").textContent = "Play";
@@ -67,6 +64,11 @@ function startTimer() {
 
     return;
   }
+
+    currentTime--;
+    updateTimerDisplay();
+  }, 1000);
+
 }
 
 function pauseTimer() {
