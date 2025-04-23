@@ -1,167 +1,163 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tang Soo Do Malaysia Scoreboard</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script src="script.js" defer></script>
-  <link rel="manifest" href="manifest.json">
-</head>
-<body>
-  <!-- Scoreboard -->
-  <div class="scoreboard" id="scoreboard">
-    <!-- Red Team -->
-    <div class="team" id="red-container">
-      <div class="penalty-section">
-        <span class="penalty-label">Penalty:</span>
-        <span class="penalty-score" id="red-penalty">0</span>
-        <div class="penalty-controls">
-          <button class="control-btn" onclick="updatePenalty('red', -1)">➖</button>
-          <button class="control-btn" onclick="updatePenalty('red', 1)">➕</button>
+<!doctype html>
+
+<html>
+
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Tang Soo Do Malaysia Scoreboard</title>
+
+    <!-- Load external CSS styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+
+  </head>
+
+  <body>
+    <!-- Scoreboard -->
+    <div class="scoreboard" id="scoreboard">
+
+      <!-- Red Team -->
+      <div class="team" id="red-container">
+        <!-- Score System -->
+        <div class="match-score" id="red-score" onclick="updateScore('red', 1)">0</div>
+        <div class="score-controls">
+          <button class="control-btn" onclick="updateScore('red', -1)">－</button>
+          <button class="control-btn" onclick="updateScore('red', 1)">＋</button>
         </div>
       </div>
-      <!-- Clicking the score adds 1 point -->
-      <div class="match-score" id="red-score" onclick="updateScore('red', 1)">0</div>
-      <div class="score-controls">
-        <button class="control-btn" onclick="updateScore('red', -1)">➖</button>
-        <button class="control-btn" onclick="updateScore('red', 1)">➕</button>
-      </div>
-    </div>
 
-    <!-- Timer Section -->
-    <div class="middle-section" id="timer-section">
-      <!-- Clicking the timer toggles play/pause -->
-      <div id="timer-display" onclick="toggleTimer()">02:00</div>
-      <div class="timer-buttons">
-        <button id="play-pause-btn" class="minimal-btn" onclick="toggleTimer()">Play</button>
-        <button class="minimal-btn" onclick="resetTimer()">Reset Timer</button>
-      </div>
-      <!-- Timer Modification Controls -->
-      <button id="toggle-flexi-btn" class="minimal-btn" onclick="toggleFlexiButtons()">⏱</button>
-      <div id="flexi-buttons" class="flexi-buttons hidden">
-        <div class="timer-controls">
-          <button class="minimal-btn" onclick="adjustTimer('minutes', 1)">➕Min</button>
-          <button class="minimal-btn" onclick="adjustTimer('seconds', 1)">➕1s</button>
+      <!-- Timer Section -->
+      <div class="middle-section" id="timer-section">
+
+        <!-- Clicking the timer toggles play/pause -->
+        <div id="timer-display" aria-live="polite" onclick="toggleTimer()">02:00</div>
+        <div class="timer-buttons">
+          <button id="play-pause-btn" class="minimal-btn" onclick="toggleTimer()">Play</button>
+          <button class="minimal-btn" onclick="resetTimer()">Reset Timer</button>
         </div>
-        <div class="timer-controls">
-          <button class="minimal-btn" onclick="adjustTimer('minutes', -1)">➖Min</button>
-          <button class="minimal-btn" onclick="adjustTimer('seconds', -1)">➖1s</button>
-        </div>
-      </div>
-    </div>
 
-    <!-- Blue Team -->
-    <div class="team" id="blue-container">
-      <div class="penalty-section">
-        <span class="penalty-label">Penalty:</span>
-        <span class="penalty-score" id="blue-penalty">0</span>
-        <div class="penalty-controls">
-          <button class="control-btn" onclick="updatePenalty('blue', -1)">➖</button>
-          <button class="control-btn" onclick="updatePenalty('blue', 1)">➕</button>
-        </div>
-      </div>
-      <!-- Clicking the score adds 1 point -->
-      <div class="match-score" id="blue-score" onclick="updateScore('blue', 1)">0</div>
-      <div class="score-controls">
-        <button class="control-btn" onclick="updateScore('blue', -1)">➖</button>
-        <button class="control-btn" onclick="updateScore('blue', 1)">➕</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer Bar: Minimalist toggles -->
-  <div class="footer-bar">
-    <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
-    <button onclick="resetAllScores()">Reset Score</button>
-    <button onclick="openSettings()">⚙️</button>
-  </div>
-
-  <!-- Settings Modal with Overlay -->
-  <div id="settings-overlay" class="modal-overlay hidden">
-    <div id="settings-modal" class="modal">
-      <button class="modal-close" id="modal-close">✖</button>
-      <div class="modal-content">
-        <h2>Settings</h2>
-        <div class="settings-row">
-          <label for="match-minutes">Match Timer:</label>
-          <div class="input-group">
-            <input type="number" id="match-minutes" value="2" min="0">
-            <span>min</span>
-            <input type="number" id="match-seconds" value="0" min="0" max="59">
-            <span>sec</span>
+        <!-- Timer Modification Controls -->
+        <button id="toggle-flexi-btn" class="minimal-btn" onclick="toggleFlexiButtons()">⏱</button>
+        <div id="flexi-buttons" class="flexi-buttons hidden">
+          <div class="timer-controls">
+            <button class="minimal-btn" onclick="adjustTimer('minutes', 1)">＋Min</button>
+            <button class="minimal-btn" onclick="adjustTimer('seconds', 1)">＋1s</button>
+          </div>
+          <div class="timer-controls">
+            <button class="minimal-btn" onclick="adjustTimer('minutes', -1)">－Min</button>
+            <button class="minimal-btn" onclick="adjustTimer('seconds', -1)">－1s</button>
           </div>
         </div>
-        <div class="settings-row">
-          <label for="interval-minutes">Interval Timer:</label>
-          <div class="input-group">
-            <input type="number" id="interval-minutes" value="1" min="0">
-            <span>min</span>
-            <input type="number" id="interval-seconds" value="0" min="0" max="59">
-            <span>sec</span>
-          </div>
-        </div>
-        <div class="settings-row">
-          <label for="rest-seconds">Rest Time:</label>
-          <div class="input-group">
-            <input type="number" id="rest-seconds" value="30" min="0">
-            <span>sec</span>
-          </div>
-        </div>
-        <div class="settings-row two-col">
-          <button class="modal-btn control-btn" onclick="resetPenaltyScore()">Reset Penalty Score</button>
-          <button class="modal-btn control-btn" onclick="resetMatchScore()">Reset Match Score</button>
-        </div>
-        <div class="settings-row two-col">
-          <button class="modal-btn control-btn" onclick="swapSides()">Swap Court</button>
-        </div>
-        <div class="settings-row two-col">
-          <button class="modal-btn control-btn" id="install-button" style="display: none;">Install App</button>
-        </div>
-        <div>
-          <p>&copy; <span id="year"></span> Shenjunathan | 🤡</p>
+      </div>
+
+      <!-- Blue Team -->
+      <div class="team" id="blue-container">
+        <!-- Score System -->
+        <div class="match-score" id="blue-score" onclick="updateScore('blue', 1)">0</div>
+        <div class="score-controls">
+          <button class="control-btn" onclick="updateScore('blue', -1)">－</button>
+          <button class="control-btn" onclick="updateScore('blue', 1)">＋</button>
         </div>
       </div>
     </div>
-  </div>
-</body>
 
-  <script>//Service Workers
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/tangsoodomalaysia-score/sw.js')
-    .then(reg => console.log("Service Worker registered!", reg))
-    .catch(err => console.log("Service Worker registration failed:", err));
-}
+    <!-- Footer Bar: Minimalist toggles -->
+    <div class="footer-bar">
+      <button id="timer-mode" onclick="toggleTimerMode()">Match Timer</button>
+      <button onclick="resetAllScores()">Reset Score</button>
+      <button onclick="openSettings()">⚙️</button>
+    </div>
 
-// Install Prompt
-let deferredPrompt;
+    <!-- Settings Modal with Overlay -->
+    <div id="settings-overlay" class="modal-overlay hidden">
+      <div id="settings-modal" class="modal">
+        <button class="modal-close" id="modal-close">✖</button>
+        <div class="modal-content">
+          <h2>Settings</h2>
+          <div class="settings-row">
+            <label for="match-minutes">Match Timer:</label>
+            <div class="input-group">
+              <input type="number" id="match-minutes" value="2" min="0">
+              <span>min</span>
+              <input type="number" id="match-seconds" value="0" min="0" max="59">
+              <span>sec</span>
+            </div>
+          </div>
+          <div class="settings-row">
+            <label for="interval-minutes">Interval Timer:</label>
+            <div class="input-group">
+              <input type="number" id="interval-minutes" value="1" min="0">
+              <span>min</span>
+              <input type="number" id="interval-seconds" value="0" min="0" max="59">
+              <span>sec</span>
+            </div>
+          </div>
+          <div class="settings-row">
+            <label for="rest-seconds">Rest Time:</label>
+            <div class="input-group">
+              <input type="number" id="rest-seconds" value="30" min="0">
+              <span>sec</span>
+            </div>
+          </div>
+          <div class="settings-row two-col">
+            <button class="modal-btn control-btn" onclick="resetMatchScore()">Reset Match Score</button>
+            <button class="modal-btn control-btn" onclick="swapSides()">Swap Court</button>
+          </div>
+          <div class="settings-row two-col">
+          </div>
+          <div class="settings-row two-col">
+            <button class="modal-btn control-btn" id="install-button" style="display: none;">Install App</button>
+          </div>
+          <div>
+            <p>&copy; <span id="year"></span> Shenjunathan | 🤡</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
+    <!-- Load external JavaScript -->
+    <script src="script.js"></script>
+    <script>//Service Workers
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/tangsoodomalaysia-score/sw.js')
+          .then(reg => console.log("Service Worker registered!", reg))
+          .catch(err => console.log("Service Worker registration failed:", err));
+      }
 
-    // Show the install button when the event is fired
-    const installButton = document.getElementById('install-button');
-    if (installButton) {
-        installButton.style.display = 'block';
+      // Install Prompt
+      let deferredPrompt;
 
-        installButton.addEventListener('click', () => {
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Show the install button when the event is fired
+        const installButton = document.getElementById('install-button');
+        if (installButton) {
+          installButton.style.display = 'block';
+
+          installButton.addEventListener('click', () => {
             if (deferredPrompt) {
-                deferredPrompt.prompt(); // Show install prompt
+              deferredPrompt.prompt(); // Show install prompt
 
-                deferredPrompt.userChoice.then(choiceResult => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the PWA install');
-                    } else {
-                        console.log('User dismissed the PWA install');
-                    }
-                    deferredPrompt = null; // Reset after use
-                });
+              deferredPrompt.userChoice.then(choiceResult => {
+                if (choiceResult.outcome === 'accepted') {
+                  console.log('User accepted the PWA install');
+                } else {
+                  console.log('User dismissed the PWA install');
+                }
+                deferredPrompt = null; // Reset after use
+              });
             }
-        });
-    }
-});
+          });
+        }
+      });
 
-</script>
-  
+    </script>
+
+  </body>
+
 </html>
