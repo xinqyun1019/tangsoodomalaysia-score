@@ -8,12 +8,12 @@
   "theme_color": "#1a175f",
   "icons": [
     {
-      "src": "/tangsoodomalaysia-score/tan-aik-teng-sibu.png",
+      "src": "/tangsoodomalaysia-score/DaaYii.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/tangsoodomalaysia-score/tan-aik-teng-sibu.png",
+      "src": "/tangsoodomalaysia-score/DaaYii.png",
       "sizes": "512x512",
       "type": "image/png"
     }
