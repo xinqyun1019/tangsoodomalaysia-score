@@ -132,7 +132,7 @@ function togglePreset() {
     document.getElementById("interval-seconds").value = 45;
 
     currentPreset = "colour";
-    document.getElementById("preset-toggle-btn").textContent = "Colour Belt Timer";
+    document.getElementById("preset-toggle-btn").textContent = "Colour Belt";
 
   } else {
     // Black Belt Timer: 2:00 match / 1:00 interval
@@ -147,7 +147,7 @@ function togglePreset() {
     document.getElementById("interval-seconds").value = 0;
 
     currentPreset = "black";
-    document.getElementById("preset-toggle-btn").textContent = "Black Belt Timer";
+    document.getElementById("preset-toggle-btn").textContent = "Black Belt";
   }
 
   updateCurrentTime();
