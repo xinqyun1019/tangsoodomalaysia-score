@@ -1,9 +1,9 @@
-// Timer settings objects
 let matchTime = { minutes: 2, seconds: 0 };
 let roundTime = { minutes: 1, seconds: 0 }; // default interval timer = 1 minute
 let restTime = { seconds: 30 };             // default rest time = 30 sec
 
 let isIntervalTimer = false;
+let isRestTimer = false;  // New flag for Rest Timer mode
 let isRunning = false;
 let timerInterval;
 let currentTime = 0;
@@ -16,9 +16,13 @@ window.addEventListener("load", () => {
 
 // Set currentTime based on current mode
 function updateCurrentTime() {
-  currentTime = isIntervalTimer
-    ? roundTime.minutes * 60 + roundTime.seconds
-    : matchTime.minutes * 60 + matchTime.seconds;
+  if (isRestTimer) {
+    currentTime = restTime.seconds;  // Rest Timer
+  } else if (isIntervalTimer) {
+    currentTime = roundTime.minutes * 60 + roundTime.seconds;  // Interval Timer
+  } else {
+    currentTime = matchTime.minutes * 60 + matchTime.seconds;  // Match Timer
+  }
 }
 
 function updateTimerDisplay() {
@@ -44,23 +48,23 @@ function startTimer() {
   isRunning = true;
   document.getElementById("play-pause-btn").textContent = "Pause";
   timerInterval = setInterval(() => {
-  if (currentTime <= 1.8) {
-    alarmSound.play().catch(error => {
-      console.error("Sound playback failed:", error);
-    });
-  }
+    if (currentTime <= 1.8) {
+      alarmSound.play().catch(error => {
+        console.error("Sound playback failed:", error);
+      });
+    }
   
-  if (currentTime <= 0) {
-    clearInterval(timerInterval);
-    isRunning = false;
-    resetTimer();
-    document.getElementById("play-pause-btn").textContent = "Play";
-    return;
-  }
-    
-  currentTime--;
-  updateTimerDisplay();
-}, 1000);
+    if (currentTime <= 0) {
+      clearInterval(timerInterval);
+      isRunning = false;
+      resetTimer();
+      document.getElementById("play-pause-btn").textContent = "Play";
+      return;
+    }
+      
+    currentTime--;
+    updateTimerDisplay();
+  }, 1000);
 }
 
 function pauseTimer() {
@@ -78,8 +82,21 @@ function resetTimer() {
 }
 
 function toggleTimerMode() {
-  isIntervalTimer = !isIntervalTimer;
-  document.getElementById("timer-mode").textContent = isIntervalTimer ? "Interval Timer" : "Match Timer";
+  if (isRestTimer) {
+    // If it's currently Rest Timer, switch to Match Timer
+    isRestTimer = false;
+    document.getElementById("timer-mode").textContent = "Match Timer";
+  } else if (isIntervalTimer) {
+    // If it's currently Interval Timer, switch to Rest Timer
+    isIntervalTimer = false;
+    isRestTimer = true;
+    document.getElementById("timer-mode").textContent = "Rest Timer";
+  } else {
+    // If it's currently Match Timer, switch to Interval Timer
+    isIntervalTimer = true;
+    document.getElementById("timer-mode").textContent = "Interval Timer";
+  }
+
   resetTimer();
 }
 
@@ -165,7 +182,6 @@ function openSettings() {
 }
 
 function closeSettings() {
-
   const overlay = document.getElementById("settings-overlay");
   const modal = document.getElementById("settings-modal");
 
