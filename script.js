@@ -52,9 +52,11 @@ function startTimer() {
   if (currentTime <= 0) {
     clearInterval(timerInterval);
     isRunning = false;
+    resetTimer();
     document.getElementById("play-pause-btn").textContent = "Play";
     return;
   }
+    
   currentTime--;
   updateTimerDisplay();
 }, 1000);
