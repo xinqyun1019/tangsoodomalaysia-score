@@ -1,31 +1,49 @@
-let matchTime = { minutes: 2, seconds: 0 }; // default match timer = 2 minutes
-let roundTime = { minutes: 1, seconds: 0 }; // default interval timer = 1 minute
-let restTime = { seconds: 30 };             // default rest time = 30 sec
-let isIntervalTimer = false;                // Default is Match Timer
-let isRestTimer = false;                    // New flag for Rest Timer mode
-let isRunning = false;
-let timerInterval;
-currentTime = 0;
-let alarmSound = new Audio("Arlam.mp3");    // Arlam sound when Timer end
-let currentPreset = "black";                // Default: Black Belt Timer
+/***********************
+ * Timer Configuration *
+ ***********************/
 
-// Preload the Arlam Sound
+// Default timer settings
+let matchTime = { minutes: 2, seconds: 0 };   // Match duration: 2 minutes
+let roundTime = { minutes: 1, seconds: 0 };   // Interval duration: 1 minute
+let restTime = { seconds: 30 };               // Rest duration: 30 seconds
+
+// Mode flags
+let isIntervalTimer = false;  // Indicates interval timer is active
+let isRestTimer = false;      // Indicates rest timer is active
+let isRunning = false;        // Whether the timer is currently counting down
+
+let timerInterval;            // Interval ID used to clear the timer
+let currentTime = 0;          // Current countdown time in seconds
+
+let alarmSound = new Audio("Arlam.mp3");       // Sound played at end of timer
+let currentPreset = "black";                   // Default preset is Black Belt timer
+
+
+/*************************
+ * Initialization Events *
+ *************************/
+
+// Preload alarm sound on page load
 window.addEventListener("load", () => {
   alarmSound.load();
 });
 
-// Set currentTime based on current mode
+// Initialize the current time and display
+updateCurrentTime();
+updateTimerDisplay();
+
+// Update currentTime depending on the active mode
 function updateCurrentTime() {
   if (isRestTimer) {
-    currentTime = restTime.seconds;  // Rest Timer
+    currentTime = restTime.seconds;
   } else if (isIntervalTimer) {
-    currentTime = roundTime.minutes * 60 + roundTime.seconds;  // Interval Timer
+    currentTime = roundTime.minutes * 60 + roundTime.seconds;
   } else {
-    currentTime = matchTime.minutes * 60 + matchTime.seconds;  // Match Timer
+    currentTime = matchTime.minutes * 60 + matchTime.seconds;
   }
 }
 
-// Update Timer
+// Update the visible timer display (formatted as MM:SS)
 function updateTimerDisplay() {
   let minutes = Math.floor(currentTime / 60);
   let seconds = currentTime % 60;
@@ -33,35 +51,41 @@ function updateTimerDisplay() {
     String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
 }
 
-// Flexible Timer
+
+/********************
+ * Timer Controls *
+ ********************/
+
+// Toggle between playing and pausing the timer
 function toggleTimer() {
   if (isRunning) {
     pauseTimer();
   } else {
-    // Hide timer modifier controls when starting
+    // Hide adjustment buttons while running
     document.getElementById("flexi-buttons").classList.add("hidden");
     document.getElementById("toggle-flexi-btn").textContent = "⏱";
     startTimer();
   }
 }
 
-// Timer Play Pause Button
+// Start the countdown and handle end-of-timer logic
 function startTimer() {
   if (isRunning) return;
   isRunning = true;
   document.getElementById("play-pause-btn").textContent = "Pause";
+
   timerInterval = setInterval(() => {
-    // Play Arlam Sound
+    // Trigger alarm when timer is about to end
     if (currentTime <= 1.8) {
       alarmSound.play().catch(error => {
         console.error("Sound playback failed:", error);
       });
     }
 
+    // If time is up, stop and reset timer
     if (currentTime <= 0) {
       clearInterval(timerInterval);
       isRunning = false;
-      // Reset timer after the timer end
       resetTimer();
       document.getElementById("play-pause-btn").textContent = "Play";
       return;
@@ -72,12 +96,14 @@ function startTimer() {
   }, 1000);
 }
 
+// Pause the timer
 function pauseTimer() {
   clearInterval(timerInterval);
   isRunning = false;
   document.getElementById("play-pause-btn").textContent = "Play";
 }
 
+// Reset the timer to the current mode's default time
 function resetTimer() {
   clearInterval(timerInterval);
   isRunning = false;
@@ -86,19 +112,21 @@ function resetTimer() {
   updateTimerDisplay();
 }
 
-// Toggle between Match, Interval, and Rest Timer
+
+/************************
+ * Mode Switching Logic *
+ ************************/
+
+// Cycle between Match -> Interval -> Rest timer modes
 function toggleTimerMode() {
   if (isRestTimer) {
-    // If it's currently Rest Timer, switch to Match Timer
     isRestTimer = false;
     document.getElementById("timer-mode").textContent = "Match Timer";
   } else if (isIntervalTimer) {
-    // If it's currently Interval Timer, switch to Rest Timer
     isIntervalTimer = false;
     isRestTimer = true;
     document.getElementById("timer-mode").textContent = "Rest Timer";
   } else {
-    // If it's currently Match Timer, switch to Interval Timer
     isIntervalTimer = true;
     document.getElementById("timer-mode").textContent = "Interval Timer";
   }
@@ -106,21 +134,31 @@ function toggleTimerMode() {
   resetTimer();
 }
 
+
+/**************************
+ * Timer Adjustment Logic *
+ **************************/
+
+// Adjust the timer manually when not running
 function adjustTimer(type, value) {
   if (isRunning) return;
+
   if (type === "seconds") {
     currentTime = Math.max(0, currentTime + value);
   } else if (type === "minutes") {
     currentTime = Math.max(0, currentTime + value * 60);
   }
+
   updateTimerDisplay();
 }
 
-// Toggle Flexi Timer Buttons
+// Show or hide timer adjustment buttons
 function toggleFlexiButtons() {
   if (isRunning) return;
+
   let flexi = document.getElementById("flexi-buttons");
   let toggleBtn = document.getElementById("toggle-flexi-btn");
+
   if (flexi.classList.contains("hidden")) {
     flexi.classList.remove("hidden");
     toggleBtn.textContent = "Hide Adjustments";
@@ -130,131 +168,142 @@ function toggleFlexiButtons() {
   }
 }
 
-// Score Update
+
+/******************
+ * Score Handling *
+ ******************/
+
+// Update the score for a team
 function updateScore(team, value) {
   let scoreEl = document.getElementById(team + "-score");
   let currentScore = parseInt(scoreEl.textContent);
   scoreEl.textContent = Math.max(0, currentScore + value);
 }
 
-// Swap Court Button
+// Swap red and blue score sides
 function swapSides() {
-  // Toggle the "swapped" class on the scoreboard for responsive swapping.
   let scoreboard = document.getElementById("scoreboard");
   scoreboard.classList.toggle("swapped");
 }
 
-// Presets for Black Belt and Color Belt Mode
+
+/***************************
+ * Presets (Black/Colour) *
+ ***************************/
+
+// Toggle between Black Belt and Colour Belt timer presets
 function togglePreset() {
   if (currentPreset === "black") {
-    // Colour Belt Timer: 1:30 match / 0:45 interval / 0:30 Rest
-    matchTime.minutes = 1;
-    matchTime.seconds = 30;
-    roundTime.minutes = 0;
-    roundTime.seconds = 45;
-    restTime.seconds = 30;
-
-    document.getElementById("match-minutes").value = 1;
-    document.getElementById("match-seconds").value = 30;
-    document.getElementById("interval-minutes").value = 0;
-    document.getElementById("interval-seconds").value = 45;
-    document.getElementById("rest-seconds").value = 30;
+    // Colour Belt: shorter match and interval
+    matchTime = { minutes: 1, seconds: 30 };
+    roundTime = { minutes: 0, seconds: 45 };
+    restTime = { seconds: 30 };
 
     currentPreset = "colour";
     document.getElementById("preset-toggle-btn").textContent = "Colour Belt";
-
   } else {
-    // Black Belt Timer: 2:00 match / 1:00 interval / 0:30 Rest
-    matchTime.minutes = 2;
-    matchTime.seconds = 0;
-    roundTime.minutes = 1;
-    roundTime.seconds = 0;
-    restTime.seconds = 30;
-
-    document.getElementById("match-minutes").value = 2;
-    document.getElementById("match-seconds").value = 0;
-    document.getElementById("interval-minutes").value = 1;
-    document.getElementById("interval-seconds").value = 0;
-    document.getElementById("rest-seconds").value = 30;
+    // Black Belt: longer durations
+    matchTime = { minutes: 2, seconds: 0 };
+    roundTime = { minutes: 1, seconds: 0 };
+    restTime = { seconds: 30 };
 
     currentPreset = "black";
     document.getElementById("preset-toggle-btn").textContent = "Black Belt";
   }
 
+  // Update input fields
+  document.getElementById("match-minutes").value = matchTime.minutes;
+  document.getElementById("match-seconds").value = matchTime.seconds;
+  document.getElementById("interval-minutes").value = roundTime.minutes;
+  document.getElementById("interval-seconds").value = roundTime.seconds;
+  document.getElementById("rest-seconds").value = restTime.seconds;
+
   updateCurrentTime();
   updateTimerDisplay();
 }
 
-// Settings Modal
 
-// Open Settings
+/*******************
+ * Settings Modal *
+ *******************/
+
+// Open the settings modal and pause timer
 function openSettings() {
   const overlay = document.getElementById("settings-overlay");
-  overlay.classList.remove("hidden"); // Show the overlay
-
   const modal = document.getElementById("settings-modal");
-  modal.classList.remove("closing"); // Ensure closing class is removed
-  modal.classList.add("showing"); // Trigger open animation
+
+  overlay.classList.remove("hidden");
+  modal.classList.remove("closing");
+  modal.classList.add("showing");
+
   pauseTimer();
 }
 
-// Close Settings
+// Close the settings modal after animation
 function closeSettings() {
   const overlay = document.getElementById("settings-overlay");
   const modal = document.getElementById("settings-modal");
 
-  // Remove "showing" to prevent conflicts
   modal.classList.remove("showing");
-  // Add "closing" to trigger the close animation
   modal.classList.add("closing");
 
-  // Ensure overlay is hidden *after* animation completes (match the animation duration)
   setTimeout(() => {
     overlay.classList.add("hidden");
     modal.classList.remove("closing");
     saveSettings();
-  }, 400); // 400ms = animation duration
+  }, 400); // Matches closing animation duration
 }
 
-// Save Settings
+// Apply settings changes from modal input fields
 function saveSettings() {
   matchTime.minutes = parseInt(document.getElementById("match-minutes").value);
   matchTime.seconds = parseInt(document.getElementById("match-seconds").value);
   roundTime.minutes = parseInt(document.getElementById("interval-minutes").value);
   roundTime.seconds = parseInt(document.getElementById("interval-seconds").value);
   restTime.seconds = parseInt(document.getElementById("rest-seconds").value);
+
   updateCurrentTime();
   updateTimerDisplay();
   document.getElementById("settings-overlay").classList.add("hidden");
 }
 
-// Reset Match Score
+
+/*****************************
+ * Match & Score Management *
+ *****************************/
+
+// Reset only the match score
 function resetMatchScore() {
   document.getElementById("red-score").textContent = "0";
   document.getElementById("blue-score").textContent = "0";
 }
 
-// Reset All Scores Button
-// Previously has penalty function, removed penalty as we don't need it
+// Reset all scores (penalties removed for simplicity)
 function resetAllScores() {
   resetMatchScore();
 }
 
-// Close modal when clicking outside modal content
+
+/*********************************
+ * Modal Event Listener Handling *
+ *********************************/
+
+// Close modal if clicking outside of it
 document.getElementById("settings-overlay").addEventListener("click", function(e) {
   if (e.target === this) {
     closeSettings();
   }
 });
 
-// Close modal when clicking the X button
+// Close modal if clicking the X button
 document.getElementById("modal-close").addEventListener("click", function() {
   closeSettings();
 });
 
-// Initialize timer on load
-updateCurrentTime();
-updateTimerDisplay();
 
-// Get Current Year
+/********************
+ * Misc / Footer UI *
+ ********************/
+
+// Display the current year in the footer
 document.getElementById("year").textContent = new Date().getFullYear();
