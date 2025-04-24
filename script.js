@@ -1,15 +1,15 @@
-let matchTime = { minutes: 2, seconds: 0 };
+let matchTime = { minutes: 2, seconds: 0 }; // default match timer = 2 minutes
 let roundTime = { minutes: 1, seconds: 0 }; // default interval timer = 1 minute
 let restTime = { seconds: 30 };             // default rest time = 30 sec
-
-let isIntervalTimer = false;
-let isRestTimer = false;  // New flag for Rest Timer mode
+let isIntervalTimer = false;                // Default is Match Timer
+let isRestTimer = false;                    // New flag for Rest Timer mode
 let isRunning = false;
 let timerInterval;
-let currentTime = 0;
-let alarmSound = new Audio("Arlam.mp3");
-let currentPreset = "black"; // Default: Black Belt Timer
+currentTime = 0;
+let alarmSound = new Audio("Arlam.mp3");    // Arlam sound when Timer end
+let currentPreset = "black";                // Default: Black Belt Timer
 
+// Preload the Arlam Sound
 window.addEventListener("load", () => {
   alarmSound.load();
 });
@@ -25,6 +25,7 @@ function updateCurrentTime() {
   }
 }
 
+// Update Timer
 function updateTimerDisplay() {
   let minutes = Math.floor(currentTime / 60);
   let seconds = currentTime % 60;
@@ -32,6 +33,7 @@ function updateTimerDisplay() {
     String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
 }
 
+// Flexible Timer
 function toggleTimer() {
   if (isRunning) {
     pauseTimer();
@@ -43,25 +45,28 @@ function toggleTimer() {
   }
 }
 
+// Timer Play Pause Button
 function startTimer() {
   if (isRunning) return;
   isRunning = true;
   document.getElementById("play-pause-btn").textContent = "Pause";
   timerInterval = setInterval(() => {
+    // Play Arlam Sound
     if (currentTime <= 1.8) {
       alarmSound.play().catch(error => {
         console.error("Sound playback failed:", error);
       });
     }
-  
+
     if (currentTime <= 0) {
       clearInterval(timerInterval);
       isRunning = false;
+      // Reset timer after the timer end
       resetTimer();
       document.getElementById("play-pause-btn").textContent = "Play";
       return;
     }
-      
+
     currentTime--;
     updateTimerDisplay();
   }, 1000);
@@ -81,6 +86,7 @@ function resetTimer() {
   updateTimerDisplay();
 }
 
+// Toggle between Match, Interval, and Rest Timer
 function toggleTimerMode() {
   if (isRestTimer) {
     // If it's currently Rest Timer, switch to Match Timer
@@ -110,6 +116,7 @@ function adjustTimer(type, value) {
   updateTimerDisplay();
 }
 
+// Toggle Flexi Timer Buttons
 function toggleFlexiButtons() {
   if (isRunning) return;
   let flexi = document.getElementById("flexi-buttons");
@@ -123,21 +130,24 @@ function toggleFlexiButtons() {
   }
 }
 
+// Score Update
 function updateScore(team, value) {
   let scoreEl = document.getElementById(team + "-score");
   let currentScore = parseInt(scoreEl.textContent);
   scoreEl.textContent = Math.max(0, currentScore + value);
 }
 
+// Swap Court Button
 function swapSides() {
   // Toggle the "swapped" class on the scoreboard for responsive swapping.
   let scoreboard = document.getElementById("scoreboard");
   scoreboard.classList.toggle("swapped");
 }
 
+// Presets for Black Belt and Color Belt Mode
 function togglePreset() {
   if (currentPreset === "black") {
-    // Colour Belt Timer: 1:30 match / 0:45 interval
+    // Colour Belt Timer: 1:30 match / 0:45 interval / 0:30 Rest
     matchTime.minutes = 1;
     matchTime.seconds = 30;
     roundTime.minutes = 0;
@@ -154,7 +164,7 @@ function togglePreset() {
     document.getElementById("preset-toggle-btn").textContent = "Colour Belt";
 
   } else {
-    // Black Belt Timer: 2:00 match / 1:00 interval
+    // Black Belt Timer: 2:00 match / 1:00 interval / 0:30 Rest
     matchTime.minutes = 2;
     matchTime.seconds = 0;
     roundTime.minutes = 1;
@@ -175,6 +185,9 @@ function togglePreset() {
   updateTimerDisplay();
 }
 
+// Settings Modal
+
+// Open Settings
 function openSettings() {
   const overlay = document.getElementById("settings-overlay");
   overlay.classList.remove("hidden"); // Show the overlay
@@ -185,6 +198,7 @@ function openSettings() {
   pauseTimer();
 }
 
+// Close Settings
 function closeSettings() {
   const overlay = document.getElementById("settings-overlay");
   const modal = document.getElementById("settings-modal");
@@ -202,6 +216,7 @@ function closeSettings() {
   }, 400); // 400ms = animation duration
 }
 
+// Save Settings
 function saveSettings() {
   matchTime.minutes = parseInt(document.getElementById("match-minutes").value);
   matchTime.seconds = parseInt(document.getElementById("match-seconds").value);
@@ -213,11 +228,14 @@ function saveSettings() {
   document.getElementById("settings-overlay").classList.add("hidden");
 }
 
+// Reset Match Score
 function resetMatchScore() {
   document.getElementById("red-score").textContent = "0";
   document.getElementById("blue-score").textContent = "0";
 }
 
+// Reset All Scores Button
+// Previously has penalty function, removed penalty as we don't need it
 function resetAllScores() {
   resetMatchScore();
 }
@@ -238,4 +256,5 @@ document.getElementById("modal-close").addEventListener("click", function() {
 updateCurrentTime();
 updateTimerDisplay();
 
+// Get Current Year
 document.getElementById("year").textContent = new Date().getFullYear();
