@@ -1,4 +1,4 @@
-const CACHE_NAME = "offline-cache-v2"; // 20250430_162
+const CACHE_NAME = "offline-cache-v2"; // 3.1.161
 const urlsToCache = [
     "/tangsoodomalaysia-score",
     "/tangsoodomalaysia-score/index.html",
