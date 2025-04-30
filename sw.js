@@ -1,40 +1,49 @@
-const CACHE_NAME = "offline-cache-v1";
+const CACHE_NAME = "offline-cache-v2"; // bump version to invalidate old cache
 const urlsToCache = [
     "/tangsoodomalaysia-score",
     "/tangsoodomalaysia-score/index.html",
-    "/tangsoodomalaysia-score/styles.css",  // Change this if your CSS file has a different name
-    "/tangsoodomalaysia-score/script.js",  // Change this if your JS file has a different name
+    "/tangsoodomalaysia-score/styles.css",
+    "/tangsoodomalaysia-score/script.js",
 ];
 
-// Install event: Cache files when the Service Worker is installed
+// Install event
 self.addEventListener("install", (event) => {
+    self.skipWaiting(); // Immediately activate new SW
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(urlsToCache);
-        })
+        caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
     );
 });
 
-self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                return response || fetch(event.request).catch(() => caches.match('/tangsoodomalaysia-score/index.html'));
-            })
-    );
-});
-
-// Activate event: Clear old caches when a new version is available
+// Activate event
 self.addEventListener("activate", (event) => {
+    clients.claim(); // Control all pages immediately
     event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
+        caches.keys().then((cacheNames) =>
+            Promise.all(
                 cacheNames.map((cache) => {
                     if (cache !== CACHE_NAME) {
                         return caches.delete(cache);
                     }
                 })
-            );
-        })
+            )
+        )
     );
+});
+
+// Fetch event
+self.addEventListener('fetch', (event) => {
+    event.respondWith(
+        caches.match(event.request).then((response) =>
+            response || fetch(event.request).catch(() =>
+                caches.match('/tangsoodomalaysia-score/index.html')
+            )
+        )
+    );
+});
+
+// Allow manual update via message
+self.addEventListener("message", (event) => {
+    if (event.data === "SKIP_WAITING") {
+        self.skipWaiting();
+    }
 });
