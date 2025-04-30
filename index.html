@@ -131,9 +131,35 @@
     <script>
       // Service Worker registration
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js') // Adjusted path just in case
-          .then(reg => console.log("Service Worker registered!", reg))
-          .catch(err => console.log("Service Worker registration failed:", err));
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          console.log("Service Worker registered!", reg);
+
+          reg.onupdatefound = () => {
+            const newWorker = reg.installing;
+            newWorker.onstatechange = () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                // New version available
+                const updateBtn = document.getElementById('update-btn');
+                if (updateBtn) {
+                  updateBtn.style.display = 'block';
+                  updateBtn.addEventListener('click', () => {
+                    newWorker.postMessage({ type: 'SKIP_WAITING' });
+                  });
+                }
+              }
+            };
+          };
+        }).catch(err => {
+          console.log("Service Worker registration failed:", err);
+        });
+
+        // Auto-reload when new service worker takes control
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (refreshing) return;
+          refreshing = true;
+          window.location.reload();
+        });
       }
 
       // Install Prompt
