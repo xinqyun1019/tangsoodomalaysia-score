@@ -307,3 +307,11 @@ document.getElementById("modal-close").addEventListener("click", function() {
 
 // Display the current year in the footer
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// Disable zoom
+document.addEventListener('touchstart', function (e) {
+    if (e.touches.length > 1) {
+        e.preventDefault(); // Prevent zooming
+    }
+}, { passive: false });
+
