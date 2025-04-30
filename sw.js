@@ -1,4 +1,4 @@
-const CACHE_NAME = "offline-cache-v2"; // bump version to invalidate old cache
+const CACHE_NAME = "offline-cache-v2"; // 20250430_162
 const urlsToCache = [
     "/tangsoodomalaysia-score",
     "/tangsoodomalaysia-score/index.html",
