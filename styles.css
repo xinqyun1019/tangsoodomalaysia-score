@@ -23,6 +23,11 @@
     font-family: var(--font-main);
   }
 
+  html, body {
+      touch-action: manipulation; /* Disables double-tap zoom */
+  }
+
+
   body {
     background-color: var(--color-bg);
     color: var(--color-text);
